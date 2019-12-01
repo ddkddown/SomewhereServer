@@ -1,0 +1,2 @@
+#somewhere的服务端程序，目前以xcode的管理文件进行管理的
+#之后再做makefile进行管理

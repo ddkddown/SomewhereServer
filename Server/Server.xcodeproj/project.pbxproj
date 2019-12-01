@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		460439DF238162260042DA5D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460439DE238162260042DA5D /* main.cpp */; };
+		460439E7238162490042DA5D /* SomeWhere_Login.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460439E5238162490042DA5D /* SomeWhere_Login.cpp */; };
+		460439EA2381625E0042DA5D /* TcpConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460439E82381625E0042DA5D /* TcpConnect.cpp */; };
+		460439EF238164300042DA5D /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 460439EE238164300042DA5D /* libboost_system.a */; };
+		460439F6238164430042DA5D /* libmysqlcppconn8.2.8.0.18.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 460439F0238164420042DA5D /* libmysqlcppconn8.2.8.0.18.dylib */; };
+		460439F7238164430042DA5D /* libmysqlcppconn-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 460439F1238164430042DA5D /* libmysqlcppconn-static.a */; };
+		460439F8238164430042DA5D /* libssl.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 460439F2238164430042DA5D /* libssl.1.1.dylib */; };
+		460439F9238164430042DA5D /* libmysqlcppconn.7.8.0.18.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 460439F3238164430042DA5D /* libmysqlcppconn.7.8.0.18.dylib */; };
+		460439FA238164430042DA5D /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 460439F4238164430042DA5D /* libcrypto.1.1.dylib */; };
+		460439FB238164430042DA5D /* libmysqlcppconn8-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 460439F5238164430042DA5D /* libmysqlcppconn8-static.a */; };
+		460439FE2382D9A00042DA5D /* SomeWhereServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460439FC2382D9A00042DA5D /* SomeWhereServer.cpp */; };
+		46043A012382D9C10042DA5D /* MysqlConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460439FF2382D9C10042DA5D /* MysqlConnect.cpp */; };
+		46043A042382D9CD0042DA5D /* RedisConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46043A022382D9CD0042DA5D /* RedisConnect.cpp */; };
+		46043A092382F0C30042DA5D /* libhiredis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46043A072382F0C20042DA5D /* libhiredis.a */; };
+		46043A0A2382F0C30042DA5D /* libhiredis.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 46043A082382F0C30042DA5D /* libhiredis.dylib */; };
+		46A27B06238C23CC006057B6 /* RequestHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46A27B04238C23CC006057B6 /* RequestHandle.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		460439D9238162260042DA5D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		460439DB238162260042DA5D /* Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server; sourceTree = BUILT_PRODUCTS_DIR; };
+		460439DE238162260042DA5D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		460439E5238162490042DA5D /* SomeWhere_Login.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SomeWhere_Login.cpp; sourceTree = "<group>"; };
+		460439E6238162490042DA5D /* SomeWhere_Login.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SomeWhere_Login.hpp; sourceTree = "<group>"; };
+		460439E82381625E0042DA5D /* TcpConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TcpConnect.cpp; sourceTree = "<group>"; };
+		460439E92381625E0042DA5D /* TcpConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TcpConnect.hpp; sourceTree = "<group>"; };
+		460439EB2381626E0042DA5D /* SomeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SomeHeader.h; sourceTree = "<group>"; };
+		460439EC238162820042DA5D /* ConnectServer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConnectServer.hpp; sourceTree = "<group>"; };
+		460439EE238164300042DA5D /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../usr/local/lib/libboost_system.a; sourceTree = "<group>"; };
+		460439F0238164420042DA5D /* libmysqlcppconn8.2.8.0.18.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmysqlcppconn8.2.8.0.18.dylib; path = "../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn8.2.8.0.18.dylib"; sourceTree = "<group>"; };
+		460439F1238164430042DA5D /* libmysqlcppconn-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysqlcppconn-static.a"; path = "../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn-static.a"; sourceTree = "<group>"; };
+		460439F2238164430042DA5D /* libssl.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.1.dylib; path = "../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libssl.1.1.dylib"; sourceTree = "<group>"; };
+		460439F3238164430042DA5D /* libmysqlcppconn.7.8.0.18.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmysqlcppconn.7.8.0.18.dylib; path = "../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn.7.8.0.18.dylib"; sourceTree = "<group>"; };
+		460439F4238164430042DA5D /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = "../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libcrypto.1.1.dylib"; sourceTree = "<group>"; };
+		460439F5238164430042DA5D /* libmysqlcppconn8-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysqlcppconn8-static.a"; path = "../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn8-static.a"; sourceTree = "<group>"; };
+		460439FC2382D9A00042DA5D /* SomeWhereServer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SomeWhereServer.cpp; sourceTree = "<group>"; };
+		460439FD2382D9A00042DA5D /* SomeWhereServer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SomeWhereServer.hpp; sourceTree = "<group>"; };
+		460439FF2382D9C10042DA5D /* MysqlConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MysqlConnect.cpp; sourceTree = "<group>"; };
+		46043A002382D9C10042DA5D /* MysqlConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MysqlConnect.hpp; sourceTree = "<group>"; };
+		46043A022382D9CD0042DA5D /* RedisConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RedisConnect.cpp; sourceTree = "<group>"; };
+		46043A032382D9CD0042DA5D /* RedisConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RedisConnect.hpp; sourceTree = "<group>"; };
+		46043A072382F0C20042DA5D /* libhiredis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libhiredis.a; path = ../../hiredis/libhiredis.a; sourceTree = "<group>"; };
+		46043A082382F0C30042DA5D /* libhiredis.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libhiredis.dylib; path = ../../hiredis/libhiredis.dylib; sourceTree = "<group>"; };
+		46043A0D2382F1820042DA5D /* hiredis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hiredis.h; sourceTree = "<group>"; };
+		46A27B04238C23CC006057B6 /* RequestHandle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RequestHandle.cpp; sourceTree = "<group>"; };
+		46A27B05238C23CC006057B6 /* RequestHandle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RequestHandle.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		460439D8238162260042DA5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46043A092382F0C30042DA5D /* libhiredis.a in Frameworks */,
+				46043A0A2382F0C30042DA5D /* libhiredis.dylib in Frameworks */,
+				460439F6238164430042DA5D /* libmysqlcppconn8.2.8.0.18.dylib in Frameworks */,
+				460439F7238164430042DA5D /* libmysqlcppconn-static.a in Frameworks */,
+				460439F8238164430042DA5D /* libssl.1.1.dylib in Frameworks */,
+				460439F9238164430042DA5D /* libmysqlcppconn.7.8.0.18.dylib in Frameworks */,
+				460439FA238164430042DA5D /* libcrypto.1.1.dylib in Frameworks */,
+				460439FB238164430042DA5D /* libmysqlcppconn8-static.a in Frameworks */,
+				460439EF238164300042DA5D /* libboost_system.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		460439D2238162260042DA5D = {
+			isa = PBXGroup;
+			children = (
+				460439DD238162260042DA5D /* Server */,
+				460439DC238162260042DA5D /* Products */,
+				460439ED238164300042DA5D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		460439DC238162260042DA5D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				460439DB238162260042DA5D /* Server */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		460439DD238162260042DA5D /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				46043A062382EF940042DA5D /* RedisConnect */,
+				46043A052382EF7F0042DA5D /* MysqlConnect */,
+				460439DE238162260042DA5D /* main.cpp */,
+				460439E5238162490042DA5D /* SomeWhere_Login.cpp */,
+				460439E6238162490042DA5D /* SomeWhere_Login.hpp */,
+				460439E82381625E0042DA5D /* TcpConnect.cpp */,
+				460439E92381625E0042DA5D /* TcpConnect.hpp */,
+				460439EB2381626E0042DA5D /* SomeHeader.h */,
+				460439EC238162820042DA5D /* ConnectServer.hpp */,
+				460439FC2382D9A00042DA5D /* SomeWhereServer.cpp */,
+				460439FD2382D9A00042DA5D /* SomeWhereServer.hpp */,
+				46A27B04238C23CC006057B6 /* RequestHandle.cpp */,
+				46A27B05238C23CC006057B6 /* RequestHandle.hpp */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		460439ED238164300042DA5D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46043A072382F0C20042DA5D /* libhiredis.a */,
+				46043A082382F0C30042DA5D /* libhiredis.dylib */,
+				460439F4238164430042DA5D /* libcrypto.1.1.dylib */,
+				460439F1238164430042DA5D /* libmysqlcppconn-static.a */,
+				460439F3238164430042DA5D /* libmysqlcppconn.7.8.0.18.dylib */,
+				460439F5238164430042DA5D /* libmysqlcppconn8-static.a */,
+				460439F0238164420042DA5D /* libmysqlcppconn8.2.8.0.18.dylib */,
+				460439F2238164430042DA5D /* libssl.1.1.dylib */,
+				460439EE238164300042DA5D /* libboost_system.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46043A052382EF7F0042DA5D /* MysqlConnect */ = {
+			isa = PBXGroup;
+			children = (
+				46043A002382D9C10042DA5D /* MysqlConnect.hpp */,
+				460439FF2382D9C10042DA5D /* MysqlConnect.cpp */,
+			);
+			path = MysqlConnect;
+			sourceTree = "<group>";
+		};
+		46043A062382EF940042DA5D /* RedisConnect */ = {
+			isa = PBXGroup;
+			children = (
+				46043A032382D9CD0042DA5D /* RedisConnect.hpp */,
+				46043A0D2382F1820042DA5D /* hiredis.h */,
+				46043A022382D9CD0042DA5D /* RedisConnect.cpp */,
+			);
+			path = RedisConnect;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		460439DA238162260042DA5D /* Server */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 460439E2238162260042DA5D /* Build configuration list for PBXNativeTarget "Server" */;
+			buildPhases = (
+				460439D7238162260042DA5D /* Sources */,
+				460439D8238162260042DA5D /* Frameworks */,
+				460439D9238162260042DA5D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Server;
+			productName = Server;
+			productReference = 460439DB238162260042DA5D /* Server */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		460439D3238162260042DA5D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "dong da kuan";
+				TargetAttributes = {
+					460439DA238162260042DA5D = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 460439D6238162260042DA5D /* Build configuration list for PBXProject "Server" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 460439D2238162260042DA5D;
+			productRefGroup = 460439DC238162260042DA5D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				460439DA238162260042DA5D /* Server */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		460439D7238162260042DA5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46A27B06238C23CC006057B6 /* RequestHandle.cpp in Sources */,
+				46043A042382D9CD0042DA5D /* RedisConnect.cpp in Sources */,
+				46043A012382D9C10042DA5D /* MysqlConnect.cpp in Sources */,
+				460439EA2381625E0042DA5D /* TcpConnect.cpp in Sources */,
+				460439DF238162260042DA5D /* main.cpp in Sources */,
+				460439FE2382D9A00042DA5D /* SomeWhereServer.cpp in Sources */,
+				460439E7238162490042DA5D /* SomeWhere_Login.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		460439E0238162260042DA5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		460439E1238162260042DA5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		460439E3238162260042DA5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/mysql-connector-c++-8.0.18/include",
+					/usr/local/include,
+					/Users/dongdakuan/hiredis,
+				);
+				LD_RUNPATH_SEARCH_PATHS = "/usr/local/mysql-connector-c++-8.0.18/lib64";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"/usr/local/mysql-connector-c++-8.0.18/lib64",
+					/Users/dongdakuan/hiredis,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		460439E4238162260042DA5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/mysql-connector-c++-8.0.18/include",
+					/usr/local/include,
+					/Users/dongdakuan/hiredis,
+				);
+				LD_RUNPATH_SEARCH_PATHS = "/usr/local/mysql-connector-c++-8.0.18/lib64";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"/usr/local/mysql-connector-c++-8.0.18/lib64",
+					/Users/dongdakuan/hiredis,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		460439D6238162260042DA5D /* Build configuration list for PBXProject "Server" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				460439E0238162260042DA5D /* Debug */,
+				460439E1238162260042DA5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		460439E2238162260042DA5D /* Build configuration list for PBXNativeTarget "Server" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				460439E3238162260042DA5D /* Debug */,
+				460439E4238162260042DA5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 460439D3238162260042DA5D /* Project object */;
+}
