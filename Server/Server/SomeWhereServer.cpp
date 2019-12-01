@@ -11,13 +11,32 @@
 const SomeWhereServer* SomeWhereServer::m_instance = new SomeWhereServer;
 bool SomeWhereServer::accept_repeat_flag = false;
 
+static void send_login_back_message(boost::asio::ip::tcp::socket& peer,bool state){
+    reply_message back_message;
+    boost::system::error_code ec;
+    char buf[sizeof(reply_message)];
+    
+    memset(buf, -1, sizeof(buf));
+    back_message.type = LOGIN_MESSAGE;
+    back_message.status = state;
+    memcpy(buf, &back_message, sizeof(reply_message));
+    
+    peer.write_some(buffer(buf),ec);
+    if (ec) {
+        std::cout<<"send_login_back_message failed!"<<std::endl;
+    }
+}
+
 static void put_mysql_data_to_redis(){
     
 }
-static void handle_login_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
+static bool handle_login_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
     std::string username;
     std::string password;
     std::string result;
+    
+    std::string exec_redis = "get ";
+    std::string exec_sql = "select * from somewhere_login where login_id = '";
     
     
     int username_length = 0;
@@ -36,74 +55,57 @@ static void handle_login_message(somewhere_message& client_message,boost::asio::
     
     std::cout<<"[handle_login_message] username:%s"<<username<<" ,password:%s"<<password<<std::endl;
     
-    std::string exec_redis = "get ";
+    
     exec_redis.append(username);
     
     //先通过redis查询
-    RedisConnect* redis = SomeWhereServer::get_instance()->get_redis_instance();
-    if(!redis){
-        std::cout<<"[handle_login_message] get redis failed";
+    std::cout<<"[info] try search by redis"<<std::endl;
+    result = RequestHandle::redis_login_op(SomeWhereServer::get_instance()->get_redis_instance(),exec_redis);
+    if(!result.empty()){
+        goto out;
     }
     
-    redis->set_cmd(exec_redis);
-    if(!redis->exec_cmd()){
-        std::cout<<"[handle_login_message] redis exec cmd failed!";
-    }
-    
-    auto redis_reply = redis->get_reply();
-    if (!(redis_reply->type == REDIS_REPLY_STATUS && strcasecmp(redis_reply->str, "OK") == 0)) {
-        std::cout<<"[handle_login_message] redis reply failed!";
-    }
-    
-    //redis查询成功
-    if(redis_reply->type == REDIS_REPLY_STRING){
-        result = redis_reply->str;
-    }else{
-        std::cout<<"redis reply type wrong :"<<redis_reply->type<<std::endl;
-    }
-    
-    redis->clean_reply();
+    result.clear();
     
     //redis查询失败时用 mysql查询
-    std::string exec_sql = "select * from somewhere_login where login_id = '";
     exec_sql.append(username);
     exec_sql.append("';");
     
-    MysqlConnect* mysql = SomeWhereServer::get_instance()->get_mysql_instance();
-    if(!mysql){
-        std::cout<<"[handle_login_message] get mysql failed,return";
-        return;
+    std::cout<<"[info] try search by mysql"<<std::endl;
+    result = RequestHandle::mysql_login_op(SomeWhereServer::get_instance()->get_mysql_instance(),exec_sql);
+    if(!result.empty()){
+        goto out;
     }
     
-    mysql->set_sql(exec_sql);
-    if(!mysql->exec_sql()){
-        std::cout<<"[handle_login_message] mysql exec sql failed!,return";
-        return;
-    }
-    
-    auto mysql_reply = mysql->get_res();
-    result = mysql_reply->getString(2);
-    
-    
+out:
+
     //比较字符串,返回密码是否正确
     if(0 == password.compare(result)){
         std::cout<<"password right"<<std::endl;
+        //将mysql数据放到redis上
+        put_mysql_data_to_redis();
+        return true;
     }else {
         std::cout<<"password wrong"<<std::endl;
+        return false;
     }
     
-    //将mysql数据放到redis上
-    put_mysql_data_to_redis();
+    
     
 }
 static void handle_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
     
     switch (client_message.type) {
         case LOGIN_MESSAGE:
-            handle_login_message(client_message,peer);
+            if(handle_login_message(client_message,peer)){
+                send_login_back_message(peer,true);
+            }else{
+                send_login_back_message(peer,false);
+            }
             break;
             
         default:
+            std::cout<<"[warning] wrong message type"<<client_message.message_body<<std::endl;
             break;
     }
     
@@ -141,6 +143,7 @@ static void handle_socket_request(const boost::system::error_code& error,
 
 static void default_accept_handler(const boost::system::error_code& error,
                                     boost::asio::ip::tcp::socket peer){
+    cout<<"[info] get an client request"<<std::endl;
     if(error){
         cout<<"[error] default_accept_handler err occur!"<<error.message()<<endl;
         //发生错误;

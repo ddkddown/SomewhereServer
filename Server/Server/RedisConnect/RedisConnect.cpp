@@ -25,6 +25,7 @@ bool RedisConnect::connect(){
         }
     }
     ret = true;
+    is_connected = true;
 out:
     return ret;
     
@@ -60,6 +61,11 @@ void RedisConnect::set_cmd(string& tmp){
     cmd = tmp;
 }
 
+void RedisConnect::free_redis_connect(){
+    redisFree(conn);
+    is_connected = false;
+}
+
 bool RedisConnect::exec_cmd(){
     bool ret = false;
     if(!is_connected){
@@ -74,12 +80,13 @@ bool RedisConnect::exec_cmd(){
     
     if(!reply){
         cout<<"[warning] clean the redis reply before execute cmd"<<endl;
-        goto out;
+        clean_reply();
     }
+    
     reply = (redisReply*)redisCommand(conn, cmd.c_str());
     if(nullptr == reply){
         cout<<"[error] redis command execute failed: "<<conn->err<<": "<<conn->errstr<<endl;
-        redisFree(conn);//这里出错后需要进行重连
+        free_redis_connect();//这里出错后需要进行重连
         connect();
         cmd.clear();
         goto out;
@@ -99,4 +106,8 @@ void RedisConnect::clean_reply(){
         freeReplyObject(reply);
         reply = nullptr;
     }
+}
+
+bool RedisConnect::get_redis_status(){
+    return is_connected;
 }

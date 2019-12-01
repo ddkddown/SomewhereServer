@@ -14,9 +14,6 @@
 #include <boost/bind/bind.hpp>
 
 #include "SomeHeader.h"
-#include "RequestHandle.hpp"
-#include "MysqlConnect/MysqlConnect.hpp"
-#include "RedisConnect/RedisConnect.hpp"
 
 using namespace std;
 using namespace boost::asio;

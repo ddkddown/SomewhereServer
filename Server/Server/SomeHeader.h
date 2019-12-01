@@ -8,8 +8,10 @@
 
 #ifndef SomeHeader_h
 #define SomeHeader_h
+#include <iostream>
 #include <string>
 #include "MysqlConnect.hpp"
+#include "RedisConnect.hpp"
 #include "RequestHandle.hpp"
 
 #define NAME_LENGTH 20

@@ -10,6 +10,16 @@
 #define RequestHandle_hpp
 
 #include <stdio.h>
-#include "SomeHeader.h"
+#include <iostream>
+#include <string>
 
+#include "MysqlConnect.hpp"
+#include "RedisConnect.hpp"
+using namespace std;
+class RequestHandle{
+public:
+    static string redis_login_op(RedisConnect* redis,string& exec_redis);
+
+    static string mysql_login_op(MysqlConnect* mysql,string& exec_sql);
+};
 #endif /* RequestHandle_hpp */

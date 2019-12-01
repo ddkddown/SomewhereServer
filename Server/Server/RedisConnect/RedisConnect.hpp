@@ -27,12 +27,14 @@ class RedisConnect{
     
     private:
         bool connect();
+        void free_redis_connect();
     
     public:
         void set_cmd(string& tmp);
         bool exec_cmd();
         redisReply* get_reply();
         void clean_reply();
+        bool get_redis_status();
     
     public:
         RedisConnect(string h = "127.0.0.1", int p = 6379);
