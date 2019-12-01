@@ -27,13 +27,56 @@ static void send_login_back_message(boost::asio::ip::tcp::socket& peer,bool stat
     }
 }
 
-static void put_mysql_data_to_redis(){
+static void put_mysql_data_to_redis(string& username,string& result){
+    std::string exec_redis = "set ";
+    redisReply* redis_reply = nullptr;
+    exec_redis += username;
+    exec_redis += " ";
+    exec_redis += result;
     
+    auto redis = SomeWhereServer::get_instance()->get_redis_instance();
+    
+    if(redis == nullptr){
+        cout<<"[error] redis is null!"<<endl;
+        goto out;
+    }
+    
+    if(!redis->get_redis_status()){
+        cout<<"[error] redis is not connect"<<endl;
+        goto out;
+    }
+    
+    redis->set_cmd(exec_redis);
+    if(!redis->exec_cmd()){
+        cout<<"[error] redis exec login cmd failed!";
+        goto out;
+    }
+    
+    redis_reply = redis->get_reply();
+    
+    if (!redis_reply){
+        cout<<"[error] after get_reply redis_reply is null!"<<endl;
+        goto out;
+    }
+    
+    //redis查询成功
+    if(redis_reply->type == REDIS_REPLY_STATUS && strncmp(redis_reply->str, "OK", sizeof(redis_reply->str))){
+        cout<<"[info] put login data to redis successed!"<<endl;
+    }else{
+        cout<<"[error] redis reply type wrong :"<<redis_reply->type<<" redis str:"<<redis_reply->str<<endl;
+        goto out;
+    }
+    
+out:
+    redis->clean_reply();
+    return;
 }
 static bool handle_login_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
     std::string username;
     std::string password;
     std::string result;
+    
+    bool put_flag = false;
     
     std::string exec_redis = "get ";
     std::string exec_sql = "select * from somewhere_login where login_id = '";
@@ -68,6 +111,7 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
     result.clear();
     
     //redis查询失败时用 mysql查询
+    put_flag = true;
     exec_sql.append(username);
     exec_sql.append("';");
     
@@ -83,7 +127,9 @@ out:
     if(0 == password.compare(result)){
         std::cout<<"password right"<<std::endl;
         //将mysql数据放到redis上
-        put_mysql_data_to_redis();
+        if(put_flag){
+            put_mysql_data_to_redis(username, result);
+        }
         return true;
     }else {
         std::cout<<"password wrong"<<std::endl;

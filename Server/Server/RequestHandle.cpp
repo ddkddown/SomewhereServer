@@ -44,8 +44,9 @@ string RequestHandle::redis_login_op(RedisConnect* redis,string& exec_redis){
         goto out;
     }
     
-    redis->clean_reply();
+   
 out:
+    redis->clean_reply();
     return ret;
 }
 
