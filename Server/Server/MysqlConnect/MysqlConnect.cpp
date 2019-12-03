@@ -85,10 +85,39 @@ bool MysqlConnect::exec_sql(){
         goto out;
     }
     
+    stmt->close();
+    
     ret = true;
 out:
     return ret;
 }
+
+bool MysqlConnect::exec_update_sql(){
+    bool ret = false;
+    
+    if(!is_connected){
+        cout<<"[warning] mysql is not connect!"<<endl;
+        goto out;
+    }
+    
+    if(sql.empty()){
+        cout<<"[warning] sql is empty!"<<endl;
+        goto out;
+    }
+    
+    stmt = conn->createStatement();
+    if(!stmt){
+        cout<<"[warning] createStatement failed!"<<endl;
+        goto out;
+    }
+    
+    stmt->executeUpdate(sql.c_str()) >= 1? ret = true : ret = false;
+    
+    stmt->close();
+out:
+    return ret;
+}
+
 
 sql::ResultSet* MysqlConnect::get_res(){
     return res;

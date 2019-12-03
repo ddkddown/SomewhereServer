@@ -21,5 +21,7 @@ public:
     static string redis_login_op(RedisConnect* redis,string& exec_redis);
 
     static string mysql_login_op(MysqlConnect* mysql,string& exec_sql);
+    
+    static bool mysql_signup_op(MysqlConnect* mysql,string& exec_sql);
 };
 #endif /* RequestHandle_hpp */

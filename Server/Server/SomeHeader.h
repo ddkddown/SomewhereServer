@@ -22,6 +22,7 @@
 
 #define LOGIN_MESSAGE 1
 #define DATA_MESSAGE 2
+#define SIGNUP_MESSAGE 3
 
 #define SUCCESS_STATUS 1
 #define FAIL_STATUS 0

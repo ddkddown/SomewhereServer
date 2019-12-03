@@ -39,6 +39,7 @@ class MysqlConnect{
         void set_sql(string& tmp);
         void clean_sql();
         bool exec_sql();
+        bool exec_update_sql();//用于执行insert，update之类的sql
     
         sql::ResultSet* get_res();
         bool get_conn_state();

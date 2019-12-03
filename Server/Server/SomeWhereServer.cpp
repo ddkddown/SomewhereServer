@@ -27,6 +27,22 @@ static void send_login_back_message(boost::asio::ip::tcp::socket& peer,bool stat
     }
 }
 
+static void send_signup_back_message(boost::asio::ip::tcp::socket& peer,bool state){
+    reply_message back_message;
+    boost::system::error_code ec;
+    char buf[sizeof(reply_message)];
+    
+    memset(buf, -1, sizeof(buf));
+    back_message.type = SIGNUP_MESSAGE;
+    back_message.status = state;
+    memcpy(buf, &back_message, sizeof(reply_message));
+    
+    peer.write_some(buffer(buf),ec);
+    if (ec) {
+        std::cout<<"send_signup_back_message failed!"<<std::endl;
+    }
+}
+
 static void put_mysql_data_to_redis(string& username,string& result){
     std::string exec_redis = "set ";
     redisReply* redis_reply = nullptr;
@@ -96,7 +112,7 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
         password.push_back(client_message.password[password_length]);
     }
     
-    std::cout<<"[handle_login_message] username:%s"<<username<<" ,password:%s"<<password<<std::endl;
+    std::cout<<"[handle_login_message] username:"<<username<<" ,password:"<<password<<std::endl;
     
     
     exec_redis.append(username);
@@ -135,10 +151,41 @@ out:
         std::cout<<"password wrong"<<std::endl;
         return false;
     }
-    
-    
-    
 }
+
+static bool handle_signup_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
+    std::string username;
+    std::string password;
+    std::string result;
+    
+    std::string exec_sql = "INSERT INTO somewhere_login VALUES(\"";
+    
+    int username_length = 0;
+    int password_length = 0;
+    
+    for(username_length = 0; username_length < NAME_LENGTH &&
+        client_message.user_name[username_length] != '\xff'; ++username_length){
+        
+        username.push_back(client_message.user_name[username_length]);
+    }
+    for(password_length = 0; password_length < PASSWORD_LENGTH &&
+        client_message.password[password_length] != '\xff'; ++password_length){
+        
+        password.push_back(client_message.password[password_length]);
+    }
+    
+    std::cout<<"[handle_signup_message] username: "<<username<<", password: "<<password<<std::endl;
+    
+    exec_sql.append(username);
+    exec_sql.append("\",");
+    exec_sql.append(password);
+    exec_sql.append(");");
+    
+    std::cout<<"[info] try signup by mysql: "<<exec_sql<<std::endl;
+    
+    return RequestHandle::mysql_signup_op(SomeWhereServer::get_instance()->get_mysql_instance(), exec_sql);
+}
+
 static void handle_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
     
     switch (client_message.type) {
@@ -149,7 +196,14 @@ static void handle_message(somewhere_message& client_message,boost::asio::ip::tc
                 send_login_back_message(peer,false);
             }
             break;
-            
+        
+        case SIGNUP_MESSAGE:
+            if(handle_signup_message(client_message,peer)){
+                send_signup_back_message(peer,true);
+            }else{
+                send_signup_back_message(peer,false);
+            }
+            break;
         default:
             std::cout<<"[warning] wrong message type"<<client_message.message_body<<std::endl;
             break;

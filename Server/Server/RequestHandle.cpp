@@ -76,3 +76,30 @@ string RequestHandle::mysql_login_op(MysqlConnect *mysql, string &exec_sql){
 out:
     return ret;
 }
+
+bool RequestHandle::mysql_signup_op(MysqlConnect *mysql, string &exec_sql){
+    bool ret = false;
+    
+    if(!mysql){
+        cout<<"[error] get mysql,failed,return"<<endl;
+        goto out;
+    }
+    
+    if(!mysql->get_conn_state()){
+        cout<<"[error] mysql is not connect!"<<endl;
+        goto out;
+    }
+    
+    mysql->set_sql(exec_sql);
+    if(!mysql->exec_update_sql()){
+        std::cout<<"[error] mysql exec signup sql failed!, return";
+        goto out;
+    }else{
+        std::cout<<"mysql exec signup sql success!return";
+    }
+    
+    ret = true;
+out:
+    return ret;
+}
+
