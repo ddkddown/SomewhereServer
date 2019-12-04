@@ -1,2 +1,3 @@
-#somewhere的服务端程序，目前以xcode的管理文件进行管理的
-#之后再做makefile进行管理
+#somewhere的服务端程序，目前以xcode和makefile进行管理的
+#希望能通过此项目学到更多技术
+#下一步希望增加打日志的功能
