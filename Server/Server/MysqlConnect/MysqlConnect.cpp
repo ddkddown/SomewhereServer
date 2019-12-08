@@ -14,19 +14,19 @@ MysqlConnect::MysqlConnect(string u,
                            ):user(u),passwd(p),host(h),database(d),is_connected(false){
     driver = sql::mysql::get_mysql_driver_instance();
     if(nullptr == driver){
-        cout<<"[error] init mysql driver instance failed!"<<std::endl;
+        LOGE("init mysql driver instance failed!");
         goto out;
     }
     
     conn = driver->connect(host.c_str(), user.c_str(), passwd.c_str());
     if(nullptr == conn){
-        cout<<"[error] connect mysql failed!"<<std::endl;
+        LOGE("connect mysql failed!");
         goto out;
     }
     
     conn->setSchema(database.c_str());
     if(conn->isClosed()){
-        cout<<"[error] conn setSchema closed!"<<std::endl;
+        LOGE("conn setSchema closed!");
         goto out;
     }
     
@@ -64,24 +64,24 @@ bool MysqlConnect::exec_sql(){
     bool ret = false;
     
     if(!is_connected){
-        cout<<"[warning] mysql is not connect!"<<endl;
+        LOGE("mysql is not connect!");
         goto out;
     }
     
     if(sql.empty()){
-        cout<<"[warning] sql is empty!"<<endl;
+        LOGE("sql is empty!");
         goto out;
     }
     
     stmt = conn->createStatement();
     if(!stmt){
-        cout<<"[warning] createStatement failed!"<<endl;
+        LOGE("createStatement failed!");
         goto out;
     }
     
     res = stmt->executeQuery(sql.c_str());
     if(!res){
-        cout<<"[warning] executeQuery failed!"<<endl;
+        LOGE("executeQuery failed!");
         goto out;
     }
     
@@ -96,18 +96,18 @@ bool MysqlConnect::exec_update_sql(){
     bool ret = false;
     
     if(!is_connected){
-        cout<<"[warning] mysql is not connect!"<<endl;
+        LOGE("mysql is not connect!");
         goto out;
     }
     
     if(sql.empty()){
-        cout<<"[warning] sql is empty!"<<endl;
+        LOGE("sql is empty!");
         goto out;
     }
     
     stmt = conn->createStatement();
     if(!stmt){
-        cout<<"[warning] createStatement failed!"<<endl;
+        LOGE("createStatement failed!");
         goto out;
     }
     

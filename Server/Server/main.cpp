@@ -12,6 +12,7 @@
 #include "SomeHeader.h"
 #include "SomeWhere_Login.hpp"
 #include "SomeWhereServer.hpp"
+#include "SomeWhereLog.h"
 using namespace boost::asio;
 
 int main(int argc, const char * argv[]) {

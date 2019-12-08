@@ -14,25 +14,25 @@ string RequestHandle::redis_login_op(RedisConnect* redis,string& exec_redis){
     ret.clear();
     
     if(redis == nullptr){
-        cout<<"[error] redis is null!"<<endl;
+        LOGE("redis is null!");
         goto out;
     }
     
     if(!redis->get_redis_status()){
-        cout<<"[error] redis is not connect"<<endl;
+        LOGE("redis is not connect");
         goto out;
     }
     
     redis->set_cmd(exec_redis);
     if(!redis->exec_cmd()){
-        cout<<"[error] redis exec login cmd failed!";
+        LOGE("redis exec login cmd failed!");
         goto out;
     }
     
     redis_reply = redis->get_reply();
     
     if (!redis_reply){
-        cout<<"[error] after get_reply redis_reply is null!"<<endl;
+        LOGE("after get_reply redis_reply is null!");
         goto out;
     }
     
@@ -40,7 +40,7 @@ string RequestHandle::redis_login_op(RedisConnect* redis,string& exec_redis){
     if(redis_reply->type == REDIS_REPLY_STRING){
         ret = redis_reply->str;
     }else{
-        cout<<"redis reply type wrong :"<<redis_reply->type<<endl;
+        LOGE("redis reply type wrong:%d str:%s",redis_reply->type,redis_reply->str);
         goto out;
     }
     
@@ -56,18 +56,18 @@ string RequestHandle::mysql_login_op(MysqlConnect *mysql, string &exec_sql){
     ret.clear();
     
     if(!mysql){
-        cout<<"[error] get mysql,failed,return"<<endl;
+        LOGE("get mysql,failed,return");
         goto out;
     }
     
     if(!mysql->get_conn_state()){
-        cout<<"[error] mysql is not connect!"<<endl;
+        LOGE("mysql is not connect!");
         goto out;
     }
     
     mysql->set_sql(exec_sql);
     if(!mysql->exec_sql()){
-        std::cout<<"[error] mysql exec login sql failed!,return";
+        LOGE("mysql exec login sql failed!,return");
         goto out;
     }
     
@@ -81,21 +81,21 @@ bool RequestHandle::mysql_signup_op(MysqlConnect *mysql, string &exec_sql){
     bool ret = false;
     
     if(!mysql){
-        cout<<"[error] get mysql,failed,return"<<endl;
+        LOGE("get mysql,failed,return");
         goto out;
     }
     
     if(!mysql->get_conn_state()){
-        cout<<"[error] mysql is not connect!"<<endl;
+        LOGE("mysql is not connect!");
         goto out;
     }
     
     mysql->set_sql(exec_sql);
     if(!mysql->exec_update_sql()){
-        std::cout<<"[error] mysql exec signup sql failed!, return";
+        LOGE("mysql exec signup sql failed!, return");
         goto out;
     }else{
-        std::cout<<"mysql exec signup sql success!return";
+        LOGI("mysql exec signup sql success!return");
     }
     
     ret = true;

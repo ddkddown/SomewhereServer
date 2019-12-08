@@ -10,7 +10,7 @@
 Login::Login(){
     driver = sql::mysql::get_mysql_driver_instance();
     if(NULL == driver){
-        cout<<"init Login error!"<<std::endl;
+        LOGE("init Login error!");
         exit(-1);
     }
 }
@@ -35,17 +35,17 @@ bool Login::initDB(string user, string passwd,string host,string database){
     
     conn = driver->connect(host.c_str(), user.c_str(), passwd.c_str());
     if(NULL == conn){
-        std::cout<<"connect mysql failed!"<<std::endl;
+        LOGE("connect mysql failed!");
         goto out;
     }
     else{
-        std::cout<<"connect mysql success!"<<std::endl;
+        LOGI("connect mysql success!");
     }
     
     conn->setSchema(database.c_str());
     if(conn->isClosed())
     {
-        std::cout<<"conn is closed"<<std::endl;
+        LOGE("conn is closed");
         goto out;
     }
     

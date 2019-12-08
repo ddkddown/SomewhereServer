@@ -17,10 +17,10 @@ bool RedisConnect::connect(){
     conn = redisConnect(host.c_str(), port);
     if(nullptr == conn || conn->err){
         if(conn){
-            cout<<"[error] redis connect:%s"<<conn->errstr<<endl;
+            LOGE("redis connect error :%s",conn->errstr);
             goto out;
         }else{
-            cout<<"[error] can't allocate redis context"<<endl;
+            LOGE("can't allocate redis context");
             goto out;
         }
     }
@@ -36,7 +36,7 @@ RedisConnect::RedisConnect(string h, int p ):
     reply = nullptr;
     cmd.clear();
     if(!connect()){
-        cout<<"[error] connect redis failed!"<<endl;
+        LOGE("[error] connect redis failed!");
         return;
     }
     
@@ -69,23 +69,23 @@ void RedisConnect::free_redis_connect(){
 bool RedisConnect::exec_cmd(){
     bool ret = false;
     if(!is_connected){
-        cout<<"[warning] redis is not connected ,can't execute cmd"<<endl;
+        LOGE("redis is not connected ,can't execute cmd");
         goto out;
     }
     
     if(cmd.empty()){
-        cout<<"[warning] cmd is empty!"<<endl;
+        LOGE("cmd is empty!");
         goto out;
     }
     
     if(!reply){
-        cout<<"[warning] clean the redis reply before execute cmd"<<endl;
+        LOGW("clean the redis reply before execute cmd");
         clean_reply();
     }
     
     reply = (redisReply*)redisCommand(conn, cmd.c_str());
     if(nullptr == reply){
-        cout<<"[error] redis command execute failed: "<<conn->err<<": "<<conn->errstr<<endl;
+        LOGE("redis command execute failed,err:%d,errstr:%s",conn->err,conn->errstr);
         free_redis_connect();//这里出错后需要进行重连
         connect();
         cmd.clear();

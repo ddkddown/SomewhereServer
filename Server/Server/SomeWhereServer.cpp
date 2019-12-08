@@ -23,7 +23,7 @@ static void send_login_back_message(boost::asio::ip::tcp::socket& peer,bool stat
     
     peer.write_some(buffer(buf),ec);
     if (ec) {
-        std::cout<<"send_login_back_message failed!"<<std::endl;
+        LOGE("send_login_back_message failed:%s",ec.message().c_str());
     }
 }
 
@@ -39,7 +39,7 @@ static void send_signup_back_message(boost::asio::ip::tcp::socket& peer,bool sta
     
     peer.write_some(buffer(buf),ec);
     if (ec) {
-        std::cout<<"send_signup_back_message failed!"<<std::endl;
+        LOGE("send_signup_back_message failed:%s",ec.message().c_str());
     }
 }
 
@@ -53,33 +53,33 @@ static void put_mysql_data_to_redis(string& username,string& result){
     auto redis = SomeWhereServer::get_instance()->get_redis_instance();
     
     if(redis == nullptr){
-        cout<<"[error] redis is null!"<<endl;
+        LOGE("redis is null!");
         goto out;
     }
     
     if(!redis->get_redis_status()){
-        cout<<"[error] redis is not connect"<<endl;
+        LOGE("redis is not connect");
         goto out;
     }
     
     redis->set_cmd(exec_redis);
     if(!redis->exec_cmd()){
-        cout<<"[error] redis exec login cmd failed!";
+        LOGE("redis exec login cmd failed!");
         goto out;
     }
     
     redis_reply = redis->get_reply();
     
     if (!redis_reply){
-        cout<<"[error] after get_reply redis_reply is null!"<<endl;
+        LOGE("after get_reply redis_reply is null!");
         goto out;
     }
     
     //redis查询成功
     if(redis_reply->type == REDIS_REPLY_STATUS && strncmp(redis_reply->str, "OK", sizeof(redis_reply->str))){
-        cout<<"[info] put login data to redis successed!"<<endl;
+        LOGI("put login data to redis successed!");
     }else{
-        cout<<"[error] redis reply type wrong :"<<redis_reply->type<<" redis str:"<<redis_reply->str<<endl;
+        LOGE("redis reply type wrong :%d, redis str:%s",redis_reply->type,redis_reply->str);
         goto out;
     }
     
@@ -112,13 +112,12 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
         password.push_back(client_message.password[password_length]);
     }
     
-    std::cout<<"[handle_login_message] username:"<<username<<" ,password:"<<password<<std::endl;
-    
-    
+    LOGI("handle login message username:%s password:%s",username.c_str(),password.c_str());
+
     exec_redis.append(username);
     
     //先通过redis查询
-    std::cout<<"[info] try search by redis"<<std::endl;
+    LOGI("try search by redis");
     result = RequestHandle::redis_login_op(SomeWhereServer::get_instance()->get_redis_instance(),exec_redis);
     if(!result.empty()){
         goto out;
@@ -131,7 +130,7 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
     exec_sql.append(username);
     exec_sql.append("';");
     
-    std::cout<<"[info] try search by mysql"<<std::endl;
+    LOGI("try search by mysql");
     result = RequestHandle::mysql_login_op(SomeWhereServer::get_instance()->get_mysql_instance(),exec_sql);
     if(!result.empty()){
         goto out;
@@ -141,14 +140,14 @@ out:
 
     //比较字符串,返回密码是否正确
     if(0 == password.compare(result)){
-        std::cout<<"password right"<<std::endl;
+        LOGI("password right");
         //将mysql数据放到redis上
         if(put_flag){
             put_mysql_data_to_redis(username, result);
         }
         return true;
     }else {
-        std::cout<<"password wrong"<<std::endl;
+        LOGI("password wrong");
         return false;
     }
 }
@@ -174,14 +173,13 @@ static bool handle_signup_message(somewhere_message& client_message,boost::asio:
         password.push_back(client_message.password[password_length]);
     }
     
-    std::cout<<"[handle_signup_message] username: "<<username<<", password: "<<password<<std::endl;
-    
+    LOGI("handle signup message username :%s password:%s",username.c_str(),password.c_str());
     exec_sql.append(username);
     exec_sql.append("\",");
     exec_sql.append(password);
     exec_sql.append(");");
     
-    std::cout<<"[info] try signup by mysql: "<<exec_sql<<std::endl;
+    LOGI("try signup by mysql:%s",exec_sql.c_str());
     
     return RequestHandle::mysql_signup_op(SomeWhereServer::get_instance()->get_mysql_instance(), exec_sql);
 }
@@ -205,7 +203,7 @@ static void handle_message(somewhere_message& client_message,boost::asio::ip::tc
             }
             break;
         default:
-            std::cout<<"[warning] wrong message type"<<client_message.message_body<<std::endl;
+            LOGE("wrong message type:%s",client_message.message_body);
             break;
     }
     
@@ -229,12 +227,12 @@ static void handle_socket_request(const boost::system::error_code& error,
                         handle_message(client_message, peer);
                     }
                 }catch(std::exception& e){
-                    std::cout<<e.what()<<std::endl;
+                    LOGE("handle socket request read some error :%s",e.what());
                     peer.close();
                 }
             }
             else{
-                std::cout<<"error , return"<<std::endl;
+                LOGE("handle socket request error :%s",ec.message().c_str());
                 return;
             }
             //对一次socket请求的处理过程
@@ -243,9 +241,9 @@ static void handle_socket_request(const boost::system::error_code& error,
 
 static void default_accept_handler(const boost::system::error_code& error,
                                     boost::asio::ip::tcp::socket peer){
-    cout<<"[info] get an client request"<<std::endl;
+    LOGI("get an client request");
     if(error){
-        cout<<"[error] default_accept_handler err occur!"<<error.message()<<endl;
+        LOGE("default_accept_handler err occur:%s",error.message().c_str());
         //发生错误;
         return;
     }else{
@@ -262,22 +260,22 @@ SomeWhereServer::SomeWhereServer():io_serv(nullptr)
                                         
     io_serv = new io_service;
     if(!io_serv){
-        cout<<"[error] alloc io_service failed! exit!"<<endl;
+        LOGI("alloc io_service failed! exit!");
         exit(-1);
     }
     ip::tcp::endpoint ep(ip::address_v4::from_string("127.0.0.1"),7796);
-    cout<<"[info] the server ip is "<<ep.address()<<endl;
+    LOGI("the server ip is:127.0.0.1");
     acceptor = new ip::tcp::acceptor(*io_serv,ep);
                                      
     mysql = new(std::nothrow)MysqlConnect("root","DDKwestbrook0","localhost","somewhere");
     if(!mysql){
-        cout<<"[error] mysql init failed!"<<endl;
+        LOGE("mysql init failed!");
         exit(-1);
     }
                                         
     redis = new(std::nothrow)RedisConnect;
     if(!redis){
-        cout<<"[error] redis init failed!"<<endl;
+        LOGE(" redis init failed!");
         exit(-1);
     }
                                         
@@ -310,7 +308,7 @@ SomeWhereServer::~SomeWhereServer(){
 #pragma mark 私有函数
 void SomeWhereServer::start_default_accept() const{
     if(!is_server_started){
-        cout<<"[error] server is not start! can't start accept!"<<endl;
+        LOGE("server is not start! can't start accept!");
         return;
     }
     acceptor->async_accept(default_accept_handler);
@@ -318,7 +316,7 @@ void SomeWhereServer::start_default_accept() const{
 
 #pragma mark 公有函数
 void SomeWhereServer::do_default_accept() const{
-    cout<<"[info] start do default accept"<<endl;
+    LOGI("start do default accept");
     start_default_accept();
     accept_repeat_flag = true;
     io_serv->run();//开始循环
@@ -327,7 +325,7 @@ void SomeWhereServer::do_default_accept() const{
 
 void SomeWhereServer::set_accept_repeat() const{
     if(!accept_repeat_flag){
-        cout<<"[error] accept_repeat_flag is false!"<<endl;
+        LOGE("accept_repeat_flag is false!");
         return;
     }
     start_default_accept();
@@ -336,7 +334,7 @@ void SomeWhereServer::set_accept_repeat() const{
 void SomeWhereServer::set_accept_handler(void(*accept_handler_t)(socket_ptr client_sock
                                                                ,const boost::system::error_code& err)){
     if(nullptr == accept_handler_t){
-        cout<<"[warning] the input accept_handler_t is null,won't set handler!"<<endl;
+        LOGW("the input accept_handler_t is null,won't set handler!");
         return;
     }
     accept_handler = accept_handler_t;

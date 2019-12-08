@@ -41,20 +41,46 @@
 		460439DB238162260042DA5D /* Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server; sourceTree = BUILT_PRODUCTS_DIR; };
 		460439DE238162260042DA5D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		460439E5238162490042DA5D /* SomeWhere_Login.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SomeWhere_Login.cpp; sourceTree = "<group>"; };
-		460439E6238162490042DA5D /* SomeWhere_Login.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SomeWhere_Login.hpp; sourceTree = "<group>"; };
 		460439E82381625E0042DA5D /* TcpConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TcpConnect.cpp; sourceTree = "<group>"; };
-		460439E92381625E0042DA5D /* TcpConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TcpConnect.hpp; sourceTree = "<group>"; };
-		460439EB2381626E0042DA5D /* SomeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SomeHeader.h; sourceTree = "<group>"; };
-		460439EC238162820042DA5D /* ConnectServer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConnectServer.hpp; sourceTree = "<group>"; };
 		460439FC2382D9A00042DA5D /* SomeWhereServer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SomeWhereServer.cpp; sourceTree = "<group>"; };
-		460439FD2382D9A00042DA5D /* SomeWhereServer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SomeWhereServer.hpp; sourceTree = "<group>"; };
 		460439FF2382D9C10042DA5D /* MysqlConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MysqlConnect.cpp; sourceTree = "<group>"; };
 		46043A002382D9C10042DA5D /* MysqlConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MysqlConnect.hpp; sourceTree = "<group>"; };
 		46043A022382D9CD0042DA5D /* RedisConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RedisConnect.cpp; sourceTree = "<group>"; };
 		46043A032382D9CD0042DA5D /* RedisConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RedisConnect.hpp; sourceTree = "<group>"; };
 		46043A0D2382F1820042DA5D /* hiredis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hiredis.h; sourceTree = "<group>"; };
+		461CD789239CFC7F002FE9F4 /* SomeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeHeader.h; sourceTree = "<group>"; };
+		461CD78D239CFC7F002FE9F4 /* Handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Handler.hpp; sourceTree = "<group>"; };
+		461CD78F239CFC7F002FE9F4 /* net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
+		461CD792239CFC7F002FE9F4 /* ConnectServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ConnectServer.hpp; sourceTree = "<group>"; };
+		461CD793239CFC7F002FE9F4 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		461CD797239CFC7F002FE9F4 /* TcpConnect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TcpConnect.hpp; sourceTree = "<group>"; };
+		461CD798239CFC7F002FE9F4 /* SomeWhere_Login.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SomeWhere_Login.hpp; sourceTree = "<group>"; };
+		461CD79A239CFC7F002FE9F4 /* hiredis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hiredis.h; sourceTree = "<group>"; };
+		461CD79D239CFC7F002FE9F4 /* SomeWhereLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeWhereLog.h; sourceTree = "<group>"; };
+		461CD79E239CFC7F002FE9F4 /* win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = win32.h; sourceTree = "<group>"; };
+		461CD7A2239CFC7F002FE9F4 /* glib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glib.h; sourceTree = "<group>"; };
+		461CD7A3239CFC7F002FE9F4 /* libev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libev.h; sourceTree = "<group>"; };
+		461CD7A4239CFC7F002FE9F4 /* ae.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ae.h; sourceTree = "<group>"; };
+		461CD7A5239CFC7F002FE9F4 /* libevent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libevent.h; sourceTree = "<group>"; };
+		461CD7A6239CFC7F002FE9F4 /* libuv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libuv.h; sourceTree = "<group>"; };
+		461CD7A7239CFC7F002FE9F4 /* macosx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macosx.h; sourceTree = "<group>"; };
+		461CD7A8239CFC7F002FE9F4 /* qt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qt.h; sourceTree = "<group>"; };
+		461CD7A9239CFC7F002FE9F4 /* ivykis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ivykis.h; sourceTree = "<group>"; };
+		461CD7AA239CFC7F002FE9F4 /* async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = async.h; sourceTree = "<group>"; };
+		461CD7AE239CFC7F002FE9F4 /* SomeWhereServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SomeWhereServer.hpp; sourceTree = "<group>"; };
+		461CD7AF239CFC7F002FE9F4 /* MysqlConnect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MysqlConnect.hpp; sourceTree = "<group>"; };
+		461CD7B1239CFC7F002FE9F4 /* dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dict.h; sourceTree = "<group>"; };
+		461CD7B2239CFC7F002FE9F4 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		461CD7B3239CFC7F002FE9F4 /* async_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = async_private.h; sourceTree = "<group>"; };
+		461CD7B4239CFC7F002FE9F4 /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
+		461CD7C5239CFC7F002FE9F4 /* sdsalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdsalloc.h; sourceTree = "<group>"; };
+		461CD7C6239CFC7F002FE9F4 /* RedisConnect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RedisConnect.hpp; sourceTree = "<group>"; };
+		461CD7CA239CFC7F002FE9F4 /* fmacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fmacros.h; sourceTree = "<group>"; };
+		461CD7CC239CFC7F002FE9F4 /* sockcompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sockcompat.h; sourceTree = "<group>"; };
+		461CD7CD239CFC7F002FE9F4 /* read.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = read.h; sourceTree = "<group>"; };
+		461CD7CE239CFC7F002FE9F4 /* hiredis_ssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hiredis_ssl.h; sourceTree = "<group>"; };
+		461CD7D2239CFC7F002FE9F4 /* RequestHandle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RequestHandle.hpp; sourceTree = "<group>"; };
 		46A27B04238C23CC006057B6 /* RequestHandle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RequestHandle.cpp; sourceTree = "<group>"; };
-		46A27B05238C23CC006057B6 /* RequestHandle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RequestHandle.hpp; sourceTree = "<group>"; };
 		46A27B072393D836006057B6 /* libmysqlcppconn8.2.8.0.18.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmysqlcppconn8.2.8.0.18.dylib; path = "../../../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn8.2.8.0.18.dylib"; sourceTree = "<group>"; };
 		46A27B082393D836006057B6 /* libmysqlcppconn-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysqlcppconn-static.a"; path = "../../../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn-static.a"; sourceTree = "<group>"; };
 		46A27B092393D836006057B6 /* libssl.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.1.dylib; path = "../../../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libssl.1.1.dylib"; sourceTree = "<group>"; };
@@ -106,19 +132,14 @@
 		460439DD238162260042DA5D /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				461CD786239CFC7F002FE9F4 /* Headers */,
 				46043A062382EF940042DA5D /* RedisConnect */,
 				46043A052382EF7F0042DA5D /* MysqlConnect */,
 				460439DE238162260042DA5D /* main.cpp */,
 				460439E5238162490042DA5D /* SomeWhere_Login.cpp */,
-				460439E6238162490042DA5D /* SomeWhere_Login.hpp */,
 				460439E82381625E0042DA5D /* TcpConnect.cpp */,
-				460439E92381625E0042DA5D /* TcpConnect.hpp */,
-				460439EB2381626E0042DA5D /* SomeHeader.h */,
-				460439EC238162820042DA5D /* ConnectServer.hpp */,
 				460439FC2382D9A00042DA5D /* SomeWhereServer.cpp */,
-				460439FD2382D9A00042DA5D /* SomeWhereServer.hpp */,
 				46A27B04238C23CC006057B6 /* RequestHandle.cpp */,
-				46A27B05238C23CC006057B6 /* RequestHandle.hpp */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -156,6 +177,53 @@
 				46043A022382D9CD0042DA5D /* RedisConnect.cpp */,
 			);
 			path = RedisConnect;
+			sourceTree = "<group>";
+		};
+		461CD786239CFC7F002FE9F4 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				461CD789239CFC7F002FE9F4 /* SomeHeader.h */,
+				461CD78D239CFC7F002FE9F4 /* Handler.hpp */,
+				461CD78F239CFC7F002FE9F4 /* net.h */,
+				461CD792239CFC7F002FE9F4 /* ConnectServer.hpp */,
+				461CD793239CFC7F002FE9F4 /* config.h */,
+				461CD797239CFC7F002FE9F4 /* TcpConnect.hpp */,
+				461CD798239CFC7F002FE9F4 /* SomeWhere_Login.hpp */,
+				461CD79A239CFC7F002FE9F4 /* hiredis.h */,
+				461CD79D239CFC7F002FE9F4 /* SomeWhereLog.h */,
+				461CD79E239CFC7F002FE9F4 /* win32.h */,
+				461CD7A1239CFC7F002FE9F4 /* adapters */,
+				461CD7AA239CFC7F002FE9F4 /* async.h */,
+				461CD7AE239CFC7F002FE9F4 /* SomeWhereServer.hpp */,
+				461CD7AF239CFC7F002FE9F4 /* MysqlConnect.hpp */,
+				461CD7B1239CFC7F002FE9F4 /* dict.h */,
+				461CD7B2239CFC7F002FE9F4 /* .gitignore */,
+				461CD7B3239CFC7F002FE9F4 /* async_private.h */,
+				461CD7B4239CFC7F002FE9F4 /* sds.h */,
+				461CD7C5239CFC7F002FE9F4 /* sdsalloc.h */,
+				461CD7C6239CFC7F002FE9F4 /* RedisConnect.hpp */,
+				461CD7CA239CFC7F002FE9F4 /* fmacros.h */,
+				461CD7CC239CFC7F002FE9F4 /* sockcompat.h */,
+				461CD7CD239CFC7F002FE9F4 /* read.h */,
+				461CD7CE239CFC7F002FE9F4 /* hiredis_ssl.h */,
+				461CD7D2239CFC7F002FE9F4 /* RequestHandle.hpp */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		461CD7A1239CFC7F002FE9F4 /* adapters */ = {
+			isa = PBXGroup;
+			children = (
+				461CD7A2239CFC7F002FE9F4 /* glib.h */,
+				461CD7A3239CFC7F002FE9F4 /* libev.h */,
+				461CD7A4239CFC7F002FE9F4 /* ae.h */,
+				461CD7A5239CFC7F002FE9F4 /* libevent.h */,
+				461CD7A6239CFC7F002FE9F4 /* libuv.h */,
+				461CD7A7239CFC7F002FE9F4 /* macosx.h */,
+				461CD7A8239CFC7F002FE9F4 /* qt.h */,
+				461CD7A9239CFC7F002FE9F4 /* ivykis.h */,
+			);
+			path = adapters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +413,7 @@
 					/usr/local/lib,
 					"/usr/local/mysql-connector-c++-8.0.18/lib64",
 					/Users/dongdakuan/hiredis,
+					"$(PROJECT_DIR)/Server/Headers",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -364,6 +433,7 @@
 					/usr/local/lib,
 					"/usr/local/mysql-connector-c++-8.0.18/lib64",
 					/Users/dongdakuan/hiredis,
+					"$(PROJECT_DIR)/Server/Headers",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

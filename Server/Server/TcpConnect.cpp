@@ -10,7 +10,7 @@
 TcpConnect::TcpConnect(){
     socket = new (std::nothrow) boost::asio::ip::tcp::socket(iosev);
     if(!socket){
-        std::cout<< "init socket failed!, app will terminate!"<<std::endl;
+        LOGE("init socket failed!, app will terminate!");
         exit(-1);
     }
 }
@@ -36,14 +36,15 @@ bool TcpConnect::send_message_to_server(){
     bool ret = false;
     if(get_send_buffer().empty())
     {
-        std::cout<<"send buffer is empty! close socket and return!";
+        LOGE("send buffer is empty! close socket and return!");
         socket->close();
         goto out;
     }
     
     send_len = socket->write_some(boost::asio::buffer(get_send_buffer(),get_send_buffer().length()),error_message);
     if(error_message){
-        std::cout<<"write_some: "<<boost::system::system_error(error_message).what()<<std::endl;
+        LOGE("send message to server write some error:%s"
+             ,boost::system::system_error(error_message).what());
         socket->close();
         goto out;
     }
@@ -60,7 +61,8 @@ bool TcpConnect::get_message_from_server(){
     
     recv_len = socket->read_some(boost::asio::buffer(recv_message),error_message);
     if(error_message){
-        std::cout<<"read_some: "<<boost::system::system_error(error_message).what()<<std::endl;
+        LOGE("get message from server read some error :%s"
+             ,boost::system::system_error(error_message).what());
         socket->close();
         goto out;
     }
@@ -74,7 +76,7 @@ bool TcpConnect::connect_to_server(){
     bool ret = false;
     
     if(get_server_port() == -1){
-        std::cout<<"port == -1 , that is invalid! return!";
+        LOGE("port == -1 , that is invalid! return!");
         set_status(false);
         goto out;
     }
@@ -84,7 +86,8 @@ bool TcpConnect::connect_to_server(){
     socket->connect(server_point,error_message);
     if(error_message)
     {
-        std::cout<<"connect error! "<<boost::system::system_error(error_message).what()<<std::endl;
+        LOGE("connect to server error :%s",
+             boost::system::system_error(error_message).what());
         set_status(false);
         goto out;
     }

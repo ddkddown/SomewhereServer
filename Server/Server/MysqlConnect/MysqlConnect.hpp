@@ -12,6 +12,9 @@
 #include <iostream>
 #include <string>
 #include <include/mysql/jdbc.h>
+
+#include "SomeWhereLog.h"
+
 using namespace std;
 
 class MysqlConnect{
