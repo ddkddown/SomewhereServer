@@ -15,6 +15,8 @@
 
 #include "MysqlConnect.hpp"
 #include "RedisConnect.hpp"
+#include "SomeWhereLog.h"
+
 using namespace std;
 class RequestHandle{
 public:

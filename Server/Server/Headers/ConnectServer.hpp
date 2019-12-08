@@ -15,6 +15,9 @@
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio.hpp>
 #include <boost/lexical_cast.hpp>
+
+#include "SomeWhereLog.h"
+
 namespace ddk{
     //连接服务器的类
     class ConnectServer{
@@ -38,18 +41,18 @@ namespace ddk{
             if(finput.is_open()){
                 std::string ip,port;
                 finput>>ip>>port;
-                std::cout<<"server_ip: "<<ip<<" ,server_port: "<<port<<std::endl;
+                LOGI("server_ip:%s, server_port:%s",ip.c_str(),port.c_str());
                 server_ip = ip;
                 try{
                     server_port = boost::lexical_cast<int>(port.c_str());
                 }catch (boost::bad_lexical_cast& e){
-                    std::cout<<"convert server_port error:"<<e.what()<<std::endl;
+                    LOGE("convert server_port error:%s",e.what());
                     server_ip.clear();
                     server_port = -1;
                 }
             }
             else{
-                std::cout<<"get server ip and port error ,set it to -1"<<std::endl;
+                LOGI("get server ip and port error ,set it to -1");
                 server_ip.clear();server_port = -1;
             }
         }

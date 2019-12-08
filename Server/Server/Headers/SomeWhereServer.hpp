@@ -14,6 +14,7 @@
 #include <boost/bind/bind.hpp>
 
 #include "SomeHeader.h"
+#include "SomeWhereLog.h"
 
 using namespace std;
 using namespace boost::asio;
