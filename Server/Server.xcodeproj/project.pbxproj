@@ -70,7 +70,6 @@
 		461CD7AE239CFC7F002FE9F4 /* SomeWhereServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SomeWhereServer.hpp; sourceTree = "<group>"; };
 		461CD7AF239CFC7F002FE9F4 /* MysqlConnect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MysqlConnect.hpp; sourceTree = "<group>"; };
 		461CD7B1239CFC7F002FE9F4 /* dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dict.h; sourceTree = "<group>"; };
-		461CD7B2239CFC7F002FE9F4 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		461CD7B3239CFC7F002FE9F4 /* async_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = async_private.h; sourceTree = "<group>"; };
 		461CD7B4239CFC7F002FE9F4 /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
 		461CD7C5239CFC7F002FE9F4 /* sdsalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdsalloc.h; sourceTree = "<group>"; };
@@ -197,7 +196,6 @@
 				461CD7AE239CFC7F002FE9F4 /* SomeWhereServer.hpp */,
 				461CD7AF239CFC7F002FE9F4 /* MysqlConnect.hpp */,
 				461CD7B1239CFC7F002FE9F4 /* dict.h */,
-				461CD7B2239CFC7F002FE9F4 /* .gitignore */,
 				461CD7B3239CFC7F002FE9F4 /* async_private.h */,
 				461CD7B4239CFC7F002FE9F4 /* sds.h */,
 				461CD7C5239CFC7F002FE9F4 /* sdsalloc.h */,
