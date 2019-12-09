@@ -17,5 +17,3 @@ then
 	echo "cp -rf ../Headers to /usr/local/include/ failed!"
 	exit 1
 fi
-
-echo "local0.*						/var/log/somewhere_server"
