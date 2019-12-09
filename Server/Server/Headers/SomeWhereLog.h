@@ -6,55 +6,34 @@
 //  Copyright © 2019年 dong da kuan. All rights reserved.
 //
 
-#ifndef SomeWhereLog_h
-#define SomeWhereLog_h
+#pragma once
+
 #include <syslog.h>
 #define IDENT "SERVER"
 
-inline void LOGI(const char* message,...){
-    if (nullptr == message) {
-        return;
-    }
-    openlog(IDENT, LOG_ODELAY, LOG_LOCAL0);
-    syslog(LOG_INFO, "%s", message);
-    closelog();
-}
+#define LOGI(msg,...) \
+openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
+syslog(LOG_INFO, "[%s]: %s",__func__,msg); \
+closelog();SA
 
-inline void LOGD(const char* message,...){
-#ifdef SOMEWHERE_DEBUG
-    if(nullptr == message){
-        return;
-    }
-    openlog(IDENT, LOG_ODELAY, LOG_LOCAL0);
-    syslog(LOG_DEBUG, "%s", message);
-    closelog();
-#endif
-}
+#define LOGD(msg,...) \
+openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
+syslog(LOG_DEBUG, "[%s]: %s",__func__,msg); \
+closelog(); \
 
-inline void LOGW(const char* message,...){
-    if(nullptr == message){
-        return;
-    }
-    openlog(IDENT, LOG_ODELAY, LOG_LOCAL0);
-    syslog(LOG_WARNING, "%s", message);
-    closelog();
-}
+#define LOGW(msg,...) \
+openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
+syslog(LOG_WARNING, "[%s]: %s",__func__,msg); \
+closelog(); \
 
-inline void LOGE(const char* message,...){
-    if(nullptr == message){
-        return;
-    }
-    openlog(IDENT, LOG_ODELAY, LOG_LOCAL0);
-    syslog(LOG_ERR, "%s", message);
-    closelog();
-}
+#define LOGE(msg,...) \
+openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
+syslog(LOG_ERR, "[%s]: %s",__func__,msg); \
+closelog(); \
 
-inline void LOGEMERGE(const char* message,...){
-    if(nullptr == message){
-        return;
-    }
-    openlog(IDENT, LOG_ODELAY, LOG_LOCAL0);
-    syslog(LOG_EMERG, "%s", message);
-    closelog();
-}
-#endif /* SomeWhereLog_h */
+#define LOGMERGE(msg,...) \
+openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
+syslog(LOG_EMERG, "[%s]: %s",__func__,msg); \
+closelog(); \
+
+
