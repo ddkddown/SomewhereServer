@@ -111,3 +111,7 @@ void RedisConnect::clean_reply(){
 bool RedisConnect::get_redis_status(){
     return is_connected;
 }
+
+
+
+

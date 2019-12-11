@@ -14,7 +14,7 @@
 #define LOGI(msg,...) \
 openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
 syslog(LOG_INFO, "[%s]: %s",__func__,msg); \
-closelog();SA
+closelog();
 
 #define LOGD(msg,...) \
 openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \

@@ -11,6 +11,9 @@
 
 #include <iostream>
 #include <hiredis.h>
+
+#include "SomeWhereLog.h"
+
 using namespace std;
 class RedisConnect{
     private:

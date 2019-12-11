@@ -6,15 +6,15 @@
 
 CXX = g++
 EXEC_TARGET = Server
-SOURCE_CPP = main.cpp ./RedisConnect/RedisConnect.cpp ./MysqlConnect/MysqlConnect.cpp SomeWhere_Login.cpp TcpConnect.cpp SomeWhereServer.cpp RequestHandle.cpp
+SOURCE_CPP = main.cpp ./MysqlConnect/MysqlConnect.cpp SomeWhereServer.cpp RequestHandle.cpp
 OBJECT_TEST = main.o
 
-LDFLAGS_COMMON = -std=c++11 -lboost_system -lhiredis -lcrypto -lmysqlcppconn8.2 -lmysqlcppconn8.2.8.0.18 -lmysqlcppconn.7 -lmysqlcppconn.7.8.0.18 -lmysqlcppconn-static -lmysqlcppconn8-static -lssl -pthread
-LPATH_COMMON = -I./Headers -I/usr/local/mysql-connector-c++-8.0.18/include -I/usr/local/include
-LLIB_COMMON = -L./Libs -L/usr/local/lib -L/usr/local/mysql-connector-c++-8.0.18/lib64
+LDFLAGS_COMMON = -std=c++11 -lRedisConnect -lboost_system -lcrypto -lmysqlcppconn8 -lmysqlcppconn -lssl -pthread
+LPATH_COMMON = -I./Headers -I/usr/local/include
+LLIB_COMMON =  -L./Libs_centos/ -L/usr/local/lib/
 
 build:
-	$(CXX) $(SOURCE_CPP) $(LDFLAGS_COMMON) $(LPATH_COMMON) $(LLIB_COMMON) -o $(EXEC_TARGET)
+	$(CXX) $(SOURCE_CPP) $(LPATH_COMMON) $(LLIB_COMMON) -o $(EXEC_TARGET) $(LDFLAGS_COMMON)
 clean:
 	rm -f $(EXEC_TARGET) *.o
 
