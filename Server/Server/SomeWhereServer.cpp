@@ -267,7 +267,7 @@ SomeWhereServer::SomeWhereServer():io_serv(nullptr)
     LOGI("the server ip is:127.0.0.1");
     acceptor = new ip::tcp::acceptor(*io_serv,ep);
                                      
-    mysql = new(std::nothrow)MysqlConnect("root","DDKwestbrook0","localhost","somewhere");
+    mysql = new(std::nothrow)MysqlConnect("root","@DDKwestbrook0","localhost","somewhere");
     if(!mysql){
         LOGE("mysql init failed!");
         exit(-1);
