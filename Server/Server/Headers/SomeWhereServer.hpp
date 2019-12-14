@@ -10,11 +10,17 @@
 #define SomeWhereServer_hpp
 
 #include <iostream>
+#include <string>
 #include <boost/asio.hpp>
 #include <boost/bind/bind.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 #include "SomeHeader.h"
 #include "SomeWhereLog.h"
+
+
+#define BOOST_SPIRIT_THREADSAFE
 
 using namespace std;
 using namespace boost::asio;
@@ -29,6 +35,15 @@ class SomeWhereServer{
     private:
         io_service* io_serv;//boost.asio使用io_service同操作系统的输入/输出进行交互
         ip::tcp::acceptor* acceptor;
+    
+        string mysql_name;
+        string mysql_password;
+        string mysql_host;
+        string mysql_database;
+        string redis_host;
+        string redis_port;
+        string server_ip;
+        string server_port;
     
     private:
         const static SomeWhereServer* m_instance;
@@ -58,9 +73,10 @@ class SomeWhereServer{
                            ,const boost::system::error_code& err);
     
     private:
-    
+        void init_config();
         void start_default_accept() const;
         SomeWhereServer();
+    
     
     public:
         void set_accept_handler(void (*accept_handler_t)(socket_ptr client_sock

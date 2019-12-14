@@ -1,0 +1,10 @@
+{
+    "MysqlName":"root",
+    "MysqlPassword":"DDKwestbrook0",
+    "MysqlHost":"localhost",
+    "MysqlDatabase":"somewhere",
+    "RedisHost":"127.0.0.1",
+    "RedisPort":"6379",
+    "ServerIp":"127.0.0.1",
+    "ServerPort":"7796"
+}

@@ -261,22 +261,29 @@ SomeWhereServer::SomeWhereServer():io_serv(nullptr)
     io_serv = new io_service;
     if(!io_serv){
         LOGI("alloc io_service failed! exit!");
-        exit(-1);
+        exit(1);
     }
-    ip::tcp::endpoint ep(ip::address_v4::from_string("127.0.0.1"),7796);
-    LOGI("the server ip is:127.0.0.1");
+    init_config();
+    ip::tcp::endpoint ep(ip::address_v4::from_string(server_ip.c_str()),atoi(server_port.c_str()));
+    LOGI("the server ip is:%s,port is%d",server_ip.c_str(),atoi(server_port.c_str()));
     acceptor = new ip::tcp::acceptor(*io_serv,ep);
                                      
-    mysql = new(std::nothrow)MysqlConnect("root","@DDKwestbrook0","localhost","somewhere");
+    mysql = new(std::nothrow)MysqlConnect(mysql_name.c_str(),mysql_password.c_str(),mysql_host.c_str(),mysql_database.c_str());
     if(!mysql){
         LOGE("mysql init failed!");
-        exit(-1);
+        exit(1);
+    }
+    else{
+        LOGI("mysql init success!");
     }
                                         
-    redis = new(std::nothrow)RedisConnect;
+    redis = new(std::nothrow)RedisConnect(redis_host.c_str(),atoi(redis_port.c_str()));
     if(!redis){
-        LOGE(" redis init failed!");
-        exit(-1);
+        LOGE("redis init failed!");
+        exit(1);
+    }
+    else{
+        LOGI("redis init success!");
     }
                                         
     accept_handler = nullptr;
@@ -340,6 +347,91 @@ void SomeWhereServer::set_accept_handler(void(*accept_handler_t)(socket_ptr clie
     accept_handler = accept_handler_t;
 }
 
+void SomeWhereServer::init_config(){
+    ifstream fs;
+    boost::property_tree::ptree ptree;
+    
+    fs.open("/Users/dongdakuan/Downloads/SomewhereServer-git/SomewhereServer/Server/Server/conf/server_config.json", fstream::in);
+    
+    if(!fs.is_open()){
+        LOGE("open server_config.json failed!");
+        exit(1);
+    }
+    
+    string s((std::istreambuf_iterator<char>(fs)),
+                std::istreambuf_iterator<char>());
+    stringstream ss(s);
+    
+    try{
+        boost::property_tree::read_json(ss, ptree);
+    }catch(exception e){
+        LOGE("read json failed! check the json file!");
+        exit(1);
+    }
+    
+    auto node = ptree.get_child_optional("MysqlName")->get_value<string>();
+    if(node.empty()){
+        LOGW("get MysqlName failed!");
+    }else{
+        mysql_name = node;
+    }
+    
+    node = ptree.get_child_optional("MysqlPassword")->get_value<string>();
+    if(node.empty()){
+        LOGW("get MysqlPassword failed!");
+    }else{
+        mysql_password = node;
+    }
+    
+    node = ptree.get_child_optional("MysqlHost")->get_value<string>();
+    if(node.empty()){
+        LOGW("get MysqlHost failed!");
+    }else{
+        mysql_host = node;
+    }
+    
+    node = ptree.get_child_optional("MysqlDatabase")->get_value<string>();
+    if(node.empty()){
+        LOGW("get MysqlDatabase failed!");
+    }else{
+        mysql_database = node;
+    }
+    
+    node = ptree.get_child_optional("RedisHost")->get_value<string>();
+    if(node.empty()){
+        LOGW("get RedisName failed!");
+    }else{
+        redis_host = node;
+    }
+    
+    node = ptree.get_child_optional("RedisPort")->get_value<string>();
+    if(node.empty()){
+        LOGW("get RedisPassword failed!");
+    }else{
+        redis_port = node;
+    }
+    
+    node = ptree.get_child_optional("ServerIp")->get_value<string>();
+    if(node.empty()){
+        LOGW("get ServerIp failed!");
+    }else{
+        server_ip = node;
+    }
+    
+    node = ptree.get_child_optional("ServerPort")->get_value<string>();
+    if(node.empty()){
+        LOGW("get ServerPort failed!");
+    }else{
+        server_port = node;
+    }
+    
+    LOGI("MysqlName:%s,MysqlPassword:%s,MysqlHost:%s,MysqlDatabase:%s,RedisHost:%s,RedisPort:%s,ServerIp:%s,ServerPort:%s"
+         ,mysql_name.c_str(),mysql_password.c_str(),mysql_host.c_str(),
+         mysql_database.c_str(),redis_host.c_str(),redis_port.c_str(),
+         server_ip.c_str(),server_port.c_str());
+
+    fs.close();
+}
 MysqlConnect* SomeWhereServer::get_mysql_instance() const{
     return mysql;
 }
@@ -347,5 +439,6 @@ MysqlConnect* SomeWhereServer::get_mysql_instance() const{
 RedisConnect* SomeWhereServer::get_redis_instance() const{
     return redis;
 }
+
 
 

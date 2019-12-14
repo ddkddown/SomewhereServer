@@ -11,7 +11,7 @@ TcpConnect::TcpConnect(){
     socket = new (std::nothrow) boost::asio::ip::tcp::socket(iosev);
     if(!socket){
         LOGE("init socket failed!, app will terminate!");
-        exit(-1);
+        exit(1);
     }
 }
 

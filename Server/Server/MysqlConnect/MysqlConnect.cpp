@@ -18,10 +18,13 @@ MysqlConnect::MysqlConnect(string u,
         goto out;
     }
     
-    conn = driver->connect(host.c_str(), user.c_str(), passwd.c_str());
-    if(nullptr == conn){
-        LOGE("connect mysql failed!");
-        goto out;
+    try {
+        conn = driver->connect(host.c_str(), user.c_str(), passwd.c_str());
+    }catch(sql::SQLException){
+        if(nullptr == conn){
+            LOGE("connect mysql failed!");
+            goto out;
+        }
     }
     
     conn->setSchema(database.c_str());

@@ -11,7 +11,7 @@ Login::Login(){
     driver = sql::mysql::get_mysql_driver_instance();
     if(NULL == driver){
         LOGE("init Login error!");
-        exit(-1);
+        exit(1);
     }
 }
 

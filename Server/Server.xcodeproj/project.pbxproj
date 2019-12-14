@@ -44,10 +44,7 @@
 		460439E82381625E0042DA5D /* TcpConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TcpConnect.cpp; sourceTree = "<group>"; };
 		460439FC2382D9A00042DA5D /* SomeWhereServer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SomeWhereServer.cpp; sourceTree = "<group>"; };
 		460439FF2382D9C10042DA5D /* MysqlConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MysqlConnect.cpp; sourceTree = "<group>"; };
-		46043A002382D9C10042DA5D /* MysqlConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MysqlConnect.hpp; sourceTree = "<group>"; };
 		46043A022382D9CD0042DA5D /* RedisConnect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RedisConnect.cpp; sourceTree = "<group>"; };
-		46043A032382D9CD0042DA5D /* RedisConnect.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RedisConnect.hpp; sourceTree = "<group>"; };
-		46043A0D2382F1820042DA5D /* hiredis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hiredis.h; sourceTree = "<group>"; };
 		461CD789239CFC7F002FE9F4 /* SomeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeHeader.h; sourceTree = "<group>"; };
 		461CD78D239CFC7F002FE9F4 /* Handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Handler.hpp; sourceTree = "<group>"; };
 		461CD78F239CFC7F002FE9F4 /* net.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.h; sourceTree = "<group>"; };
@@ -79,6 +76,7 @@
 		461CD7CD239CFC7F002FE9F4 /* read.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = read.h; sourceTree = "<group>"; };
 		461CD7CE239CFC7F002FE9F4 /* hiredis_ssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hiredis_ssl.h; sourceTree = "<group>"; };
 		461CD7D2239CFC7F002FE9F4 /* RequestHandle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RequestHandle.hpp; sourceTree = "<group>"; };
+		462A05DE23A46CA800881DDD /* server_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server_config.json; sourceTree = "<group>"; };
 		46A27B04238C23CC006057B6 /* RequestHandle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RequestHandle.cpp; sourceTree = "<group>"; };
 		46A27B072393D836006057B6 /* libmysqlcppconn8.2.8.0.18.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmysqlcppconn8.2.8.0.18.dylib; path = "../../../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn8.2.8.0.18.dylib"; sourceTree = "<group>"; };
 		46A27B082393D836006057B6 /* libmysqlcppconn-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysqlcppconn-static.a"; path = "../../../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn-static.a"; sourceTree = "<group>"; };
@@ -131,6 +129,7 @@
 		460439DD238162260042DA5D /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				462A05DD23A46CA800881DDD /* conf */,
 				461CD786239CFC7F002FE9F4 /* Headers */,
 				46043A062382EF940042DA5D /* RedisConnect */,
 				46043A052382EF7F0042DA5D /* MysqlConnect */,
@@ -162,7 +161,6 @@
 		46043A052382EF7F0042DA5D /* MysqlConnect */ = {
 			isa = PBXGroup;
 			children = (
-				46043A002382D9C10042DA5D /* MysqlConnect.hpp */,
 				460439FF2382D9C10042DA5D /* MysqlConnect.cpp */,
 			);
 			path = MysqlConnect;
@@ -171,8 +169,6 @@
 		46043A062382EF940042DA5D /* RedisConnect */ = {
 			isa = PBXGroup;
 			children = (
-				46043A032382D9CD0042DA5D /* RedisConnect.hpp */,
-				46043A0D2382F1820042DA5D /* hiredis.h */,
 				46043A022382D9CD0042DA5D /* RedisConnect.cpp */,
 			);
 			path = RedisConnect;
@@ -181,29 +177,16 @@
 		461CD786239CFC7F002FE9F4 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				462A05DF23A4702A00881DDD /* thirdpart */,
 				461CD789239CFC7F002FE9F4 /* SomeHeader.h */,
 				461CD78D239CFC7F002FE9F4 /* Handler.hpp */,
-				461CD78F239CFC7F002FE9F4 /* net.h */,
 				461CD792239CFC7F002FE9F4 /* ConnectServer.hpp */,
-				461CD793239CFC7F002FE9F4 /* config.h */,
 				461CD797239CFC7F002FE9F4 /* TcpConnect.hpp */,
 				461CD798239CFC7F002FE9F4 /* SomeWhere_Login.hpp */,
-				461CD79A239CFC7F002FE9F4 /* hiredis.h */,
 				461CD79D239CFC7F002FE9F4 /* SomeWhereLog.h */,
-				461CD79E239CFC7F002FE9F4 /* win32.h */,
-				461CD7A1239CFC7F002FE9F4 /* adapters */,
-				461CD7AA239CFC7F002FE9F4 /* async.h */,
 				461CD7AE239CFC7F002FE9F4 /* SomeWhereServer.hpp */,
 				461CD7AF239CFC7F002FE9F4 /* MysqlConnect.hpp */,
-				461CD7B1239CFC7F002FE9F4 /* dict.h */,
-				461CD7B3239CFC7F002FE9F4 /* async_private.h */,
-				461CD7B4239CFC7F002FE9F4 /* sds.h */,
-				461CD7C5239CFC7F002FE9F4 /* sdsalloc.h */,
 				461CD7C6239CFC7F002FE9F4 /* RedisConnect.hpp */,
-				461CD7CA239CFC7F002FE9F4 /* fmacros.h */,
-				461CD7CC239CFC7F002FE9F4 /* sockcompat.h */,
-				461CD7CD239CFC7F002FE9F4 /* read.h */,
-				461CD7CE239CFC7F002FE9F4 /* hiredis_ssl.h */,
 				461CD7D2239CFC7F002FE9F4 /* RequestHandle.hpp */,
 			);
 			path = Headers;
@@ -222,6 +205,35 @@
 				461CD7A9239CFC7F002FE9F4 /* ivykis.h */,
 			);
 			path = adapters;
+			sourceTree = "<group>";
+		};
+		462A05DD23A46CA800881DDD /* conf */ = {
+			isa = PBXGroup;
+			children = (
+				462A05DE23A46CA800881DDD /* server_config.json */,
+			);
+			path = conf;
+			sourceTree = "<group>";
+		};
+		462A05DF23A4702A00881DDD /* thirdpart */ = {
+			isa = PBXGroup;
+			children = (
+				461CD7A1239CFC7F002FE9F4 /* adapters */,
+				461CD79E239CFC7F002FE9F4 /* win32.h */,
+				461CD7AA239CFC7F002FE9F4 /* async.h */,
+				461CD79A239CFC7F002FE9F4 /* hiredis.h */,
+				461CD793239CFC7F002FE9F4 /* config.h */,
+				461CD78F239CFC7F002FE9F4 /* net.h */,
+				461CD7B1239CFC7F002FE9F4 /* dict.h */,
+				461CD7B3239CFC7F002FE9F4 /* async_private.h */,
+				461CD7B4239CFC7F002FE9F4 /* sds.h */,
+				461CD7C5239CFC7F002FE9F4 /* sdsalloc.h */,
+				461CD7CA239CFC7F002FE9F4 /* fmacros.h */,
+				461CD7CD239CFC7F002FE9F4 /* read.h */,
+				461CD7CC239CFC7F002FE9F4 /* sockcompat.h */,
+				461CD7CE239CFC7F002FE9F4 /* hiredis_ssl.h */,
+			);
+			path = thirdpart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

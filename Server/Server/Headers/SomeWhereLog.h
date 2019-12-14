@@ -11,29 +11,51 @@
 #include <syslog.h>
 #define IDENT "SERVER"
 
-#define LOGI(msg,...) \
-openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
-syslog(LOG_INFO, "[%s]: %s",__func__,msg); \
-closelog();
+#define LOG_MAXSIZE 2048
 
-#define LOGD(msg,...) \
+#define LOGI(...) \
+do{\
+char _LOGI_BUF_[LOG_MAXSIZE] = {0}; \
 openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
-syslog(LOG_DEBUG, "[%s]: %s",__func__,msg); \
-closelog(); \
+sprintf(_LOGI_BUF_,__VA_ARGS__); \
+syslog(LOG_INFO, "[%s]: %s",__func__,_LOGI_BUF_); \
+closelog();\
+}while(0)
 
-#define LOGW(msg,...) \
+#define LOGD(...) \
+do{\
+char _LOGD_BUF_[LOG_MAXSIZE] = {0}; \
 openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
-syslog(LOG_WARNING, "[%s]: %s",__func__,msg); \
+sprintf(_LOGD_BUF_,__VA_ARGS__); \
+syslog(LOG_DEBUG, "[%s]: %s",__func__,_LOGD_BUF_); \
 closelog(); \
+}while(0)
 
-#define LOGE(msg,...) \
+#define LOGW(...) \
+do{\
+char _LOGW_BUF_[LOG_MAXSIZE]  = {0}; \
 openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
-syslog(LOG_ERR, "[%s]: %s",__func__,msg); \
+sprintf(_LOGW_BUF_,__VA_ARGS__); \
+syslog(LOG_WARNING, "[%s]: %s",__func__,_LOGW_BUF_); \
 closelog(); \
+}while(0)
 
-#define LOGMERGE(msg,...) \
+#define LOGE(...) \
+do{\
+char _LOGE_BUF_[LOG_MAXSIZE] = {0}; \
 openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
-syslog(LOG_EMERG, "[%s]: %s",__func__,msg); \
+sprintf(_LOGE_BUF_,__VA_ARGS__); \
+syslog(LOG_ERR, "[%s]: %s",__func__,_LOGE_BUF_); \
 closelog(); \
+}while(0)
+
+#define LOGMERGE(...) \
+do{\
+char _LOGEMERGE_BUF_[LOG_MAXSIZE] = {0}; \
+openlog(IDENT, LOG_ODELAY, LOG_LOCAL0); \
+sprintf(_LOGEMERGE_BUF_,__VA_ARGS__); \
+syslog(LOG_EMERG, "[%s]: %s",__func__,_LOGEMERGE_BUF_); \
+closelog(); \
+}while(0)
 
 

@@ -15,7 +15,7 @@
 #include "SomeWhereLog.h"
 using namespace boost::asio;
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char * argv[]){
     auto i = SomeWhereServer::get_instance();
     i->do_default_accept();
 }
