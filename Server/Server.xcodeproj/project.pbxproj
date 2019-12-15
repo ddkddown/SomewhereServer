@@ -13,6 +13,7 @@
 		460439FE2382D9A00042DA5D /* SomeWhereServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460439FC2382D9A00042DA5D /* SomeWhereServer.cpp */; };
 		46043A012382D9C10042DA5D /* MysqlConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460439FF2382D9C10042DA5D /* MysqlConnect.cpp */; };
 		46043A042382D9CD0042DA5D /* RedisConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46043A022382D9CD0042DA5D /* RedisConnect.cpp */; };
+		462A05EA23A634A000881DDD /* libboost_thread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 462A05E923A634A000881DDD /* libboost_thread.dylib */; };
 		46A27B06238C23CC006057B6 /* RequestHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46A27B04238C23CC006057B6 /* RequestHandle.cpp */; };
 		46A27B0D2393D837006057B6 /* libmysqlcppconn8.2.8.0.18.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A27B072393D836006057B6 /* libmysqlcppconn8.2.8.0.18.dylib */; };
 		46A27B0E2393D837006057B6 /* libmysqlcppconn-static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A27B082393D836006057B6 /* libmysqlcppconn-static.a */; };
@@ -77,6 +78,7 @@
 		461CD7CE239CFC7F002FE9F4 /* hiredis_ssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hiredis_ssl.h; sourceTree = "<group>"; };
 		461CD7D2239CFC7F002FE9F4 /* RequestHandle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RequestHandle.hpp; sourceTree = "<group>"; };
 		462A05DE23A46CA800881DDD /* server_config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = server_config.json; sourceTree = "<group>"; };
+		462A05E923A634A000881DDD /* libboost_thread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_thread.dylib; path = ../../../../../../usr/local/lib/libboost_thread.dylib; sourceTree = "<group>"; };
 		46A27B04238C23CC006057B6 /* RequestHandle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RequestHandle.cpp; sourceTree = "<group>"; };
 		46A27B072393D836006057B6 /* libmysqlcppconn8.2.8.0.18.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmysqlcppconn8.2.8.0.18.dylib; path = "../../../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn8.2.8.0.18.dylib"; sourceTree = "<group>"; };
 		46A27B082393D836006057B6 /* libmysqlcppconn-static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmysqlcppconn-static.a"; path = "../../../../../../usr/local/mysql-connector-c++-8.0.18/lib64/libmysqlcppconn-static.a"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				462A05EA23A634A000881DDD /* libboost_thread.dylib in Frameworks */,
 				46A27B102393D837006057B6 /* libmysqlcppconn.7.8.0.18.dylib in Frameworks */,
 				46A27B162393D867006057B6 /* libboost_system.a in Frameworks */,
 				46A27B0D2393D837006057B6 /* libmysqlcppconn8.2.8.0.18.dylib in Frameworks */,
@@ -145,6 +148,7 @@
 		460439ED238164300042DA5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				462A05E923A634A000881DDD /* libboost_thread.dylib */,
 				46A27B132393D867006057B6 /* libboost_system.a */,
 				46A27B142393D867006057B6 /* libhiredis.0.14.dylib */,
 				46A27B152393D867006057B6 /* libhiredis.a */,

@@ -11,10 +11,13 @@
 
 #include <iostream>
 #include <string>
+#include <list>
+#include <vector>
 #include <boost/asio.hpp>
 #include <boost/bind/bind.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/thread/thread.hpp>
 
 #include "SomeHeader.h"
 #include "SomeWhereLog.h"

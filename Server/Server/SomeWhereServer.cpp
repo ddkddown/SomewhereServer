@@ -11,6 +11,14 @@
 const SomeWhereServer* SomeWhereServer::m_instance = new SomeWhereServer;
 bool SomeWhereServer::accept_repeat_flag = false;
 
+static void service_to_run(io_service* io_serv){
+    if(io_serv == nullptr){
+        LOGE("io_serv is null!");
+        exit(1);
+    }
+    io_serv->run();
+}
+
 static void send_login_back_message(boost::asio::ip::tcp::socket& peer,bool state){
     reply_message back_message;
     boost::system::error_code ec;
@@ -256,7 +264,8 @@ static void default_accept_handler(const boost::system::error_code& error,
 
 SomeWhereServer::SomeWhereServer():io_serv(nullptr)
                                     ,acceptor(nullptr)
-                                    ,is_server_started(false){
+                                    ,is_server_started(false)
+                                    ,thread_num(10){
                                         
     io_serv = new io_service;
     if(!io_serv){
@@ -326,7 +335,12 @@ void SomeWhereServer::do_default_accept() const{
     LOGI("start do default accept");
     start_default_accept();
     accept_repeat_flag = true;
-    io_serv->run();//开始循环
+    boost::thread_group tg;
+    
+    for(int i = 0;i < thread_num;++i){
+        tg.create_thread(boost::bind(service_to_run,io_serv));
+    }
+    tg.join_all();
 }
 
 

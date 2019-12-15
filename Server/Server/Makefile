@@ -9,7 +9,7 @@ EXEC_TARGET = Server
 SOURCE_CPP = main.cpp ./MysqlConnect/MysqlConnect.cpp SomeWhereServer.cpp RequestHandle.cpp
 OBJECT_TEST = main.o
 
-LDFLAGS_COMMON = -std=c++11 -lRedisConnect -lboost_system -lcrypto -lmysqlcppconn8 -lmysqlcppconn -lssl -pthread
+LDFLAGS_COMMON = -std=c++11 -lRedisConnect -lboost_system -lboost_thread -lcrypto -lmysqlcppconn8 -lmysqlcppconn -lssl -pthread
 LPATH_COMMON = -I./Headers -I/usr/local/include
 LLIB_COMMON =  -L./Libs_centos/ -L/usr/local/lib/
 
