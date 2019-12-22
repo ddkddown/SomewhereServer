@@ -72,7 +72,10 @@ string RequestHandle::mysql_login_op(MysqlConnect *mysql, string &exec_sql){
     }
     
     mysql_reply = mysql->get_res();
-    ret = mysql_reply->getString(2);
+    LOGI("test : %s %d",exec_sql.c_str(),mysql_reply->getRow());
+    mysql_reply->next();
+    LOGI("test :  %s",mysql_reply->getString("login_id").c_str());
+    ret = mysql_reply->getString("password");
 out:
     return ret;
 }

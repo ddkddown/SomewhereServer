@@ -229,8 +229,6 @@ static void handle_socket_request(const boost::system::error_code& error,
                     size_t len = peer.read_some(buffer(buf));
                     if(len > 0){
                         somewhere_message client_message;
-                        std::string sql1;
-                        std::string sql2;
                         memcpy(&client_message, buf, sizeof(somewhere_message));
                         handle_message(client_message, peer);
                     }
