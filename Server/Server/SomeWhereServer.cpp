@@ -211,7 +211,7 @@ static void handle_message(somewhere_message& client_message,boost::asio::ip::tc
             }
             break;
         default:
-            LOGE("wrong message type:%s",client_message.message_body);
+            LOGE("wrong message type:%c",client_message.type);
             break;
     }
     
@@ -228,6 +228,7 @@ static void handle_socket_request(const boost::system::error_code& error,
                     char buf[sizeof(somewhere_message)];
                     size_t len = peer.read_some(buffer(buf));
                     if(len > 0){
+                        LOGI("test message:%s",buf);
                         somewhere_message client_message;
                         memcpy(&client_message, buf, sizeof(somewhere_message));
                         handle_message(client_message, peer);

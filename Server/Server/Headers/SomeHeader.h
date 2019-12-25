@@ -20,9 +20,9 @@
 #define MESSAGE_END 5
 #define MESSAGE_NOT_END 6
 
-#define LOGIN_MESSAGE 1
-#define DATA_MESSAGE 2
-#define SIGNUP_MESSAGE 3
+#define LOGIN_MESSAGE '1'
+#define DATA_MESSAGE '2'
+#define SIGNUP_MESSAGE '3'
 
 #define SUCCESS_STATUS 1
 #define FAIL_STATUS 0
