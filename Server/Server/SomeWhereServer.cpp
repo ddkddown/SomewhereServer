@@ -19,7 +19,7 @@ static void service_to_run(io_service* io_serv){
     io_serv->run();
 }
 
-static void send_login_back_message(boost::asio::ip::tcp::socket& peer,bool state){
+static void send_login_back_message(boost::asio::ip::tcp::socket& peer,uint8_t state){
     reply_message back_message;
     boost::system::error_code ec;
     char buf[sizeof(reply_message)];
@@ -28,14 +28,13 @@ static void send_login_back_message(boost::asio::ip::tcp::socket& peer,bool stat
     back_message.type = LOGIN_MESSAGE;
     back_message.status = state;
     memcpy(buf, &back_message, sizeof(reply_message));
-    
     peer.write_some(buffer(buf),ec);
     if (ec) {
         LOGE("send_login_back_message failed:%s",ec.message().c_str());
     }
 }
 
-static void send_signup_back_message(boost::asio::ip::tcp::socket& peer,bool state){
+static void send_signup_back_message(boost::asio::ip::tcp::socket& peer,uint8_t state){
     reply_message back_message;
     boost::system::error_code ec;
     char buf[sizeof(reply_message)];
@@ -110,12 +109,12 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
     int password_length = 0;
     
     for(username_length = 0; username_length < NAME_LENGTH &&
-        client_message.user_name[username_length] != '\xff'; ++username_length){
+        client_message.user_name[username_length] != END_CHAR; ++username_length){
         
         username.push_back(client_message.user_name[username_length]);
     }
     for(password_length = 0; password_length < PASSWORD_LENGTH &&
-        client_message.password[password_length] != '\xff'; ++password_length){
+        client_message.password[password_length] != END_CHAR; ++password_length){
         
         password.push_back(client_message.password[password_length]);
     }
@@ -125,7 +124,7 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
     exec_redis.append(username);
     
     //先通过redis查询
-    LOGI("try search by redis");
+    LOGI("try search by redis:%s",exec_redis.c_str());
     result = RequestHandle::redis_login_op(SomeWhereServer::get_instance()->get_redis_instance(),exec_redis);
     if(!result.empty()){
         goto out;
@@ -138,7 +137,7 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
     exec_sql.append(username);
     exec_sql.append("';");
     
-    LOGI("try search by mysql");
+    LOGI("try search by mysql:%s",exec_sql.c_str());
     result = RequestHandle::mysql_login_op(SomeWhereServer::get_instance()->get_mysql_instance(),exec_sql);
     if(!result.empty()){
         goto out;
@@ -197,9 +196,9 @@ static void handle_message(somewhere_message& client_message,boost::asio::ip::tc
     switch (client_message.type) {
         case LOGIN_MESSAGE:
             if(handle_login_message(client_message,peer)){
-                send_login_back_message(peer,true);
+                send_login_back_message(peer,SUCCESS_STATUS);
             }else{
-                send_login_back_message(peer,false);
+                send_login_back_message(peer,FAIL_STATUS);
             }
             break;
         

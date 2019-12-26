@@ -24,8 +24,8 @@
 #define DATA_MESSAGE '2'
 #define SIGNUP_MESSAGE '3'
 
-#define SUCCESS_STATUS 1
-#define FAIL_STATUS 0
+#define SUCCESS_STATUS '1'
+#define FAIL_STATUS '0'
 
 typedef struct somewhere_message{
     uint8_t type;

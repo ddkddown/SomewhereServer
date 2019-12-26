@@ -24,6 +24,7 @@
 
 
 #define BOOST_SPIRIT_THREADSAFE
+#define END_CHAR '0'
 
 using namespace std;
 using namespace boost::asio;
