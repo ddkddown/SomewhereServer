@@ -50,6 +50,22 @@ static void send_signup_back_message(boost::asio::ip::tcp::socket& peer,uint8_t 
     }
 }
 
+static void send_data_back_message(boost::asio::ip::tcp::socket& peer, uint8_t state){
+    reply_message back_message;
+    boost::system::error_code ec;
+    char buf[sizeof(reply_message)];
+    
+    memset(buf, -1, sizeof(buf));
+    back_message.type = DATA_MESSAGE;
+    back_message.status = state;
+    memcpy(buf, &back_message, sizeof(reply_message));
+    
+    peer.write_some(buffer(buf),ec);
+    if(ec){
+        LOGE("send_data_back_message failed:%s",ec.message().c_str());
+    }
+}
+
 static void put_mysql_data_to_redis(string& username,string& result){
     std::string exec_redis = "set ";
     redisReply* redis_reply = nullptr;
@@ -83,7 +99,7 @@ static void put_mysql_data_to_redis(string& username,string& result){
     }
     
     //redis查询成功
-    if(redis_reply->type == REDIS_REPLY_STATUS && strncmp(redis_reply->str, "OK", sizeof(redis_reply->str))){
+    if(redis_reply->type == REDIS_REPLY_STATUS && strncmp(redis_reply->str, "OK", sizeof("OK"))){
         LOGI("put login data to redis successed!");
     }else{
         LOGE("redis reply type wrong :%d, redis str:%s",redis_reply->type,redis_reply->str);
@@ -108,6 +124,7 @@ static bool handle_login_message(somewhere_message& client_message,boost::asio::
     int username_length = 0;
     int password_length = 0;
     
+    LOGI("client_message: username:%s password:%s",client_message.user_name,client_message.password);
     for(username_length = 0; username_length < NAME_LENGTH &&
         client_message.user_name[username_length] != END_CHAR; ++username_length){
         
@@ -159,6 +176,70 @@ out:
     }
 }
 
+static bool handle_data_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer,std::ofstream& fp){
+    bool ret = false;
+    if(!fp.is_open()){
+        LOGE("%s fp is not open: %d",client_message.message_head,fp.is_open());
+        goto out;
+    }
+    
+    //暂时用is_end判断是否为最后一个data消息
+    if(client_message.is_end != MESSAGE_END){
+        fp<<client_message.message_body;
+    }
+    else{
+        std::string content;
+        for (int i = 0; i < MESSAGE_LENGTH && client_message.message_body[i] != END_CHAR; ++i) {
+            content.push_back(client_message.message_body[i]);
+        }
+        fp<<content;
+    }
+    ret = true;
+out:
+    return ret;
+}
+
+static bool before_handle_data(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
+    bool ret = false;
+    int head_length = 0;
+    std::string header;
+    std::string path = "/home/dongdakuan/somewhere/";
+    ofstream ofs;
+    
+    for(head_length = 0; head_length < MESSAGE_HEAD &&
+        client_message.message_head[head_length] != END_CHAR; ++head_length){
+        header.push_back(client_message.message_head[head_length]);
+    }
+    //在非当前路径下创建文件有权限问题
+    //path += header;
+    //header = path;
+    
+    LOGI("message store path:%s", header.c_str());
+    
+    try {
+        ofs.open(header.c_str(),std::ofstream::out | std::ofstream::app);
+    } catch (exception e) {
+        LOGE("open :%s file failed:%s",header.c_str(),e.what());
+        goto out;
+    }
+    
+    if(!handle_data_message(client_message, peer, ofs)){
+        LOGE("handle_data_message failed!");
+        goto out;
+    }
+    
+    ret = true;
+    
+out:
+    if(ofs.is_open()){
+        ofs.close();
+    }
+    
+    return ret;
+}
+
+
+
 static bool handle_signup_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
     std::string username;
     std::string password;
@@ -191,6 +272,8 @@ static bool handle_signup_message(somewhere_message& client_message,boost::asio:
     return RequestHandle::mysql_signup_op(SomeWhereServer::get_instance()->get_mysql_instance(), exec_sql);
 }
 
+
+
 static void handle_message(somewhere_message& client_message,boost::asio::ip::tcp::socket& peer){
     
     switch (client_message.type) {
@@ -209,8 +292,19 @@ static void handle_message(somewhere_message& client_message,boost::asio::ip::tc
                 send_signup_back_message(peer,false);
             }
             break;
+            
+        case DATA_MESSAGE:
+            if(before_handle_data(client_message, peer)){
+                send_data_back_message(peer, true);
+            }else{
+                send_data_back_message(peer, false);
+            }
+            //处理文本数据的存放
+            //文本数据需要多次传输
+            //message——end派上用场
+            break;
         default:
-            LOGE("wrong message type:%c",client_message.type);
+            LOGE("wrong message type:%c,%s,%s",client_message.type,client_message.message_body,client_message.user_name);
             break;
     }
     
@@ -226,18 +320,21 @@ static void handle_socket_request(const boost::system::error_code& error,
                 try{
                     char buf[sizeof(somewhere_message)];
                     size_t len = peer.read_some(buffer(buf));
-                    if(len > 0){
-                        LOGI("test message:%s",buf);
+                    while(len > 0){
+                        LOGI("test message:%s,%zu",buf,len);
                         somewhere_message client_message;
                         memcpy(&client_message, buf, sizeof(somewhere_message));
                         handle_message(client_message, peer);
+                        len = peer.read_some(buffer(buf));
                     }
+                    peer.close();
                 }catch(std::exception& e){
                     LOGE("handle socket request read some error :%s",e.what());
                     peer.close();
                 }
             }
             else{
+                peer.close();
                 LOGE("handle socket request error :%s",ec.message().c_str());
                 return;
             }
